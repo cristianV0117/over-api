@@ -60,7 +60,8 @@ abstract class RouteServiceProvider extends ServiceProvider
      */
     public function mapRoutes(): void
     {
-        Route::prefix($this->prefix)
+        Route::middleware('api')
+            ->prefix($this->prefix)
             ->namespace($this->namespace)
             ->group(base_path($this->group));
     }
