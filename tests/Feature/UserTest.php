@@ -13,11 +13,28 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_feature_user_index_controller()
+    public function test_feature_user_index_controller(): void
     {
         $appVersion = env("APP_VERSION");
 
         $response = $this->get('api/' . $appVersion . '/users');
+
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            "error" => false
+        ]);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_feature_user_show_controller(): void
+    {
+        $appVersion = env("APP_VERSION");
+
+        $response = $this->get('api/' . $appVersion . '/users/' . rand(1, 5));
 
         $response->assertStatus(200);
         $response->assertJsonFragment([
