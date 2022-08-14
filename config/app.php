@@ -200,7 +200,10 @@ return [
         \Src\Status\System\Infrastructure\Services\RouteServiceProvider::class,
         // APPLICATION - USER //
         \Src\Application\User\Infrastructure\Services\RouteServiceProvider::class,
-        \Src\Application\User\Infrastructure\Services\DependencyServiceProvider::class
+        \Src\Application\User\Infrastructure\Services\DependencyServiceProvider::class,
+        // MANAGEMENT - LOGIN //
+        \Src\Management\Login\Infrastructure\Services\RouteServiceProvider::class,
+        \Src\Management\Login\Infrastructure\Services\DependencyServiceProvider::class
 
     ],
 

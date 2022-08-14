@@ -6,22 +6,24 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class HomeTest extends TestCase
+class LoginTest extends TestCase
 {
     /**
+     * A basic feature test example.
+     *
      * @return void
      */
-    public function test_feature_home_controller(): void
+    public function test_feature_login_user_controller(): void
     {
         $appVersion = env("APP_VERSION");
 
-        $response = $this->get('api/' . $appVersion, [
+        $response = $this->get('api/' . $appVersion . '/login', [
             'Authorization' => env("API_KEY")
         ]);
 
         $response->assertStatus(200);
         $response->assertJsonFragment([
-            "over" => "OVER API"
+            "error" => false
         ]);
     }
 }

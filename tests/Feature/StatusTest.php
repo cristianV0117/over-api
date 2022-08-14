@@ -13,7 +13,9 @@ class StatusTest extends TestCase
     {
         $appVersion = env("APP_VERSION");
 
-        $response = $this->get('api/' . $appVersion . '/status');
+        $response = $this->get('api/' . $appVersion . '/status', [
+            'Authorization' => env("API_KEY")
+        ]);
 
         $response->assertStatus(200);
         $response->assertJsonFragment([

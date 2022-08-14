@@ -17,7 +17,9 @@ class UserTest extends TestCase
     {
         $appVersion = env("APP_VERSION");
 
-        $response = $this->get('api/' . $appVersion . '/users');
+        $response = $this->get('api/' . $appVersion . '/users',  [
+            'Authorization' => env("API_KEY")
+        ]);
 
         $response->assertStatus(200);
         $response->assertJsonFragment([
@@ -34,7 +36,9 @@ class UserTest extends TestCase
     {
         $appVersion = env("APP_VERSION");
 
-        $response = $this->get('api/' . $appVersion . '/users/' . rand(1, 5));
+        $response = $this->get('api/' . $appVersion . '/users/' . rand(1, 5), [
+            'Authorization' => env("API_KEY")
+        ]);
 
         $response->assertStatus(200);
         $response->assertJsonFragment([
