@@ -16,8 +16,8 @@ demostrar mi conocimientos en arquitectura de software y patrones de diseño gui
 * Composer V 2.0.12
 
 ## ARQUITECTURA & CLEAN CODE
-* ARQUITECTURA HEXAGONAL Y DDD **Domain driven design**
-* TDD **Test driven development**
+* ARQUITECTURA HEXAGONAL Y DDD (**Domain driven design**)
+* TDD (**Test driven development**)
 * Conceptos sobre **S.O.L.I.D**
 * Single responsibility principle
 * Liskov substitution principle
@@ -30,6 +30,7 @@ demostrar mi conocimientos en arquitectura de software y patrones de diseño gui
 
 ## HERRAMIENTAS UTILIZADAS PARA EL DESARROLLO
 * PHP Storm
+* Laragon
 * Git
 * GitHub
 * Postman
