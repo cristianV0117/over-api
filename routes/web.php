@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+$appVersion = env("APP_VERSION");
+Route::get('/', static function () use ($appVersion) {
+    return redirect('api/' . $appVersion);
 });

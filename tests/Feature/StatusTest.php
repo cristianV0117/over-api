@@ -7,8 +7,6 @@ use Tests\TestCase;
 class StatusTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
      * @return void
      */
     public function test_if_connection_with_database_is_successfully(): void
@@ -21,5 +19,17 @@ class StatusTest extends TestCase
         $response->assertJsonFragment([
             "message" => "OK"
         ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_if_connection_with_database_is_fail(): void
+    {
+        $appVersion = env("APP_VERSION");
+
+        $response = $this->get('api/' . $appVersion . '/status');
+
+        $response->assertStatus(503);
     }
 }

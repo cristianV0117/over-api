@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+$appVersion = env("APP_VERSION");
+Route::get('/', static function () use ($appVersion) {
+    return redirect('api/' . $appVersion);
+});
