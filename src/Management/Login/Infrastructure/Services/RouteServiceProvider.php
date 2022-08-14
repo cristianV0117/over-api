@@ -17,7 +17,8 @@ final class RouteServiceProvider extends ServiceProvider
         $this->setDependency(
             'api/' . $appVersion . '/login',
             'Src\Management\Login\Infrastructure\Controllers',
-            'src/Management/Login/Infrastructure/Routes/Api.php'
+            'src/Management/Login/Infrastructure/Routes/Api.php',
+            true
         );
         parent::__construct($app);
     }
