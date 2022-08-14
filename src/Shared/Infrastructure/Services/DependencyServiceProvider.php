@@ -9,23 +9,17 @@ use Illuminate\Support\ServiceProvider as Service;
 abstract class DependencyServiceProvider extends Service
 {
     /**
-     * @var mixed
+     * @var array
      */
-    private mixed $useCase;
-    /**
-     * @var mixed
-     */
-    private mixed $contract;
-    /**
-     * @var mixed
-     */
-    private mixed $repository;
+    private array $dependencies;
 
-    public function setDependency($useCase, $contract, $repository): void
+    /**
+     * @param array $dependencies
+     * @return void
+     */
+    public function setDependency(array $dependencies): void
     {
-        $this->useCase = $useCase;
-        $this->contract = $contract;
-        $this->repository = $repository;
+        $this->dependencies = $dependencies;
     }
 
     /**
@@ -35,9 +29,11 @@ abstract class DependencyServiceProvider extends Service
      */
     public function register(): void
     {
-        $this->app
-            ->when($this->useCase)
-            ->needs($this->contract)
-            ->give($this->repository);
+        foreach ($this->dependencies as $value) {
+            $this->app
+                ->when($value["useCase"])
+                ->needs($value["contract"])
+                ->give($value["repository"]);
+        }
     }
 }

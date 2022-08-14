@@ -14,12 +14,15 @@ class DependencyServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         $this->setDependency([
-            \Src\Application\User\Application\Get\UserIndexUseCase::class,
-            \Src\Application\User\Application\Get\UserShowUseCase::class
-        ],
-            \Src\Application\User\Domain\Contracts\UserRepositoryContract::class,
-            \Src\Application\User\Infrastructure\Repositories\Eloquent\UserRepository::class
-        );
+            [
+                "useCase" => [
+                    \Src\Application\User\Application\Get\UserIndexUseCase::class,
+                    \Src\Application\User\Application\Get\UserShowUseCase::class
+                ],
+                "contract" => \Src\Application\User\Domain\Contracts\UserRepositoryContract::class,
+                "repository" => \Src\Application\User\Infrastructure\Repositories\Eloquent\UserRepository::class
+            ]
+        ]);
         parent::__construct($app);
     }
 }

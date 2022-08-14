@@ -14,11 +14,21 @@ class DependencyServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         $this->setDependency([
-            \Src\Management\Login\Application\Login\LoginAuthUseCase::class
-        ],
-            \Src\Management\Login\Domain\Contracts\LoginRepositoryContract::class,
-            \Src\Management\Login\Infrastructure\Repositories\Eloquent\LoginRepository::class
-        );
+            [
+                "useCase" => [
+                    \Src\Management\Login\Application\Login\LoginAuthUseCase::class
+                ],
+                "contract" => \Src\Management\Login\Domain\Contracts\LoginRepositoryContract::class,
+                "repository" => \Src\Management\Login\Infrastructure\Repositories\Eloquent\LoginRepository::class
+            ],
+            [
+                "useCase" => [
+                    \Src\Management\Login\Application\Auth\LoginAuthenticationUseCase::class
+                ],
+                "contract" => \Src\Management\Login\Domain\Contracts\LoginAuthenticationContract::class,
+                "repository" => \Src\Management\Login\Infrastructure\Authentication\Jwt\LoginAuthentication::class
+            ]
+        ]);
         parent::__construct($app);
     }
 }
