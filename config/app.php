@@ -197,7 +197,10 @@ return [
 
         // HEXAGONAL ZONE //
         // STATUS - SYSTEM //
-        \Src\Status\System\Infrastructure\Services\RouteServiceProvider::class
+        \Src\Status\System\Infrastructure\Services\RouteServiceProvider::class,
+        // APPLICATION - USER //
+        \Src\Application\User\Infrastructure\Services\RouteServiceProvider::class,
+        \Src\Application\User\Infrastructure\Services\DependencyServiceProvider::class
 
     ],
 

@@ -1,8 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\User\Domain\Contracts;
 
-class UserRepositoryContract
-{
+use Src\Application\User\Domain\User;
 
+interface UserRepositoryContract
+{
+    /**
+     * @return User
+     */
+    public function index(): User;
 }

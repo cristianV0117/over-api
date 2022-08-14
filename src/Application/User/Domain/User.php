@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\User\Domain;
 
-class User
+use Src\Shared\Domain\Domain;
+
+final class User extends Domain
 {
 
 }
