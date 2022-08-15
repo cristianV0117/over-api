@@ -17,8 +17,12 @@ class LoginTest extends TestCase
     {
         $appVersion = env("APP_VERSION");
 
-        $response = $this->get('api/' . $appVersion . '/login', [
+        $response = $this->withHeaders([
             'Authorization' => env("API_KEY")
+        ])->post('api/' . $appVersion . '/login', [
+            'user_name' => "default1",
+            'email' => "t7wGsTlHjy@default.com",
+            'password' => 'default'
         ]);
 
         $response->assertStatus(200);

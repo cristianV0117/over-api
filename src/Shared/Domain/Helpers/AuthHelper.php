@@ -15,8 +15,10 @@ trait AuthHelper
             $aud = $_SERVER['HTTP_CLIENT_IP'];
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $aud = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
+        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
             $aud = $_SERVER['REMOTE_ADDR'];
+        } else {
+            $aud = null;
         }
 
         $aud .= @$_SERVER['HTTP_USER_AGENT'];

@@ -17,7 +17,8 @@ class DependencyServiceProvider extends ServiceProvider
             [
                 "useCase" => [
                     \Src\Application\User\Application\Get\UserIndexUseCase::class,
-                    \Src\Application\User\Application\Get\UserShowUseCase::class
+                    \Src\Application\User\Application\Get\UserShowUseCase::class,
+                    \Src\Application\User\Application\Store\UserStoreUseCase::class
                 ],
                 "contract" => \Src\Application\User\Domain\Contracts\UserRepositoryContract::class,
                 "repository" => \Src\Application\User\Infrastructure\Repositories\Eloquent\UserRepository::class

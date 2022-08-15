@@ -20,3 +20,5 @@ Route::get('/', static function () use ($appVersion) {
 });
 
 Route::get('/' . $appVersion, HomeController::class);
+
+Route::post($appVersion . '/users', \Src\Application\User\Infrastructure\Controllers\UserStoreController::class);
