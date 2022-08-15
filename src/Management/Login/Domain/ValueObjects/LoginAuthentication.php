@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Src\Management\Login\Domain\ValueObjects;
 
+use Src\Shared\Domain\Helpers\AuthHelper;
+use Src\Shared\Domain\Helpers\EnvHelper;
 use Src\Shared\Domain\ValueObjects\CriteriaValueObject;
 
 final class LoginAuthentication extends CriteriaValueObject
 {
+    use AuthHelper, EnvHelper;
+
     /**
      * @var array|object
      */
@@ -35,38 +39,11 @@ final class LoginAuthentication extends CriteriaValueObject
     }
 
     /**
-     * @return mixed
-     */
-    public function private(): mixed
-    {
-        return env("API_JWT");
-    }
-
-    /**
      * @return float|int
      */
     private function time(): float|int
     {
         $time = time();
         return $time + (60*60);
-    }
-
-    /**
-     * @return string
-     */
-    private function aud(): string
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $aud = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $aud = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $aud = $_SERVER['REMOTE_ADDR'];
-        }
-
-        $aud .= @$_SERVER['HTTP_USER_AGENT'];
-        $aud .= gethostname();
-
-        return sha1($aud);
     }
 }
