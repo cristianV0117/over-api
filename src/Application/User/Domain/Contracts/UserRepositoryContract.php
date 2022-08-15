@@ -26,4 +26,10 @@ interface UserRepositoryContract
      * @return User
      */
     public function store(UserStore $store): User;
+
+    /**
+     * @param UserId $id
+     * @return User
+     */
+    public function destroy(UserId $id): User;
 }

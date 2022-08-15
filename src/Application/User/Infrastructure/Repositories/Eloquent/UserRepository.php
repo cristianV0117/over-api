@@ -53,4 +53,41 @@ class UserRepository implements UserRepositoryContract
         }
         return new User($store->toArray());
     }
+
+    /**
+     * @param UserId $id
+     * @return User
+     */
+    public function destroy(UserId $id): User
+    {
+        $record = $this->model->find($id->value());
+
+        if (is_null($record)) {
+            return $this->repositoryExceptions("User not found", 401);
+        }
+
+        $response = $record->delete();
+
+        return new User(($response) ? [
+            "id" => $record->id
+        ]: null);
+    }
+
+    /**
+     * @param string $message
+     * @param int $status
+     * @return User
+     */
+    private function repositoryExceptions(
+        string $message,
+        int $status
+    ): User
+    {
+        $user = new User(null);
+        $user->setException([
+            "message" => $message,
+            "code" => $status
+        ]);
+        return $user;
+    }
 }
