@@ -4,18 +4,18 @@ Bienvenido al API de la app **OVER**
 
 Un API de ingreso de tareas y control de ingresos de usuarios.
 
-## OBJETIVO
+## OBJETIVO :dart:
 Esta aplicacion tiene como objetivo ser soporte y ayuda en mi experiencia como desarrollador,
 dando a conocer un poco de mi flujo de trabajo y el como me desenvuelvo al momento de desarrollar una aplicacion y
 demostrar mi conocimientos en arquitectura de software y patrones de diseño guiandome en conceptos de codigo limpio.
 
-## EN EL DESARROLLO SE HA UTILIZADO
+## EN EL DESARROLLO SE HA UTILIZADO :speaker:
 * PHP V 8.1.9
 * Laravel V 9.24.0
 * MySQL
 * Composer V 2.0.12
 
-## ARQUITECTURA & CLEAN CODE
+## ARQUITECTURA & CLEAN CODE :bulb:
 * ARQUITECTURA HEXAGONAL Y DDD (**Domain driven design**)
 * TDD (**Test driven development**)
 * Conceptos sobre **S.O.L.I.D**
@@ -28,7 +28,7 @@ demostrar mi conocimientos en arquitectura de software y patrones de diseño gui
 * HATEOAS
 * POO
 
-## HERRAMIENTAS UTILIZADAS PARA EL DESARROLLO
+## HERRAMIENTAS UTILIZADAS PARA EL DESARROLLO :wrench:
 * PHP Storm
 * Laragon
 * Git
@@ -39,7 +39,10 @@ demostrar mi conocimientos en arquitectura de software y patrones de diseño gui
 * Heroku
 * Star UML
 
-## PRODUCCION - https://back-over-api.herokuapp.com/api/v1
+## ARBOL DE DIRECTORIOS :deciduous_tree:
+![src.](https://github.com/cristianV0117/over-api/blob/main/public/src.png)
+
+## PRODUCCION :up: - https://back-over-api.herokuapp.com/api/v1
 
 ## ¿DESEAS PROBAR LA API EN POSTMAN?
 
