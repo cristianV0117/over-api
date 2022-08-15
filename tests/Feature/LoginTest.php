@@ -20,10 +20,12 @@ class LoginTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => env("API_KEY")
         ])->post('api/' . $appVersion . '/login', [
-            'user_name' => "default1",
-            'email' => "t7wGsTlHjy@default.com",
-            'password' => 'default'
+            'user_name' => "manual",
+            'email' => "Dach@manual.com",
+            'password' => 'manual'
         ]);
+
+        dump($response->getContent());
 
         $response->assertStatus(200);
         $response->assertJsonFragment([

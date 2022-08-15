@@ -7,6 +7,7 @@ namespace Src\Application\User\Domain\Contracts;
 use Src\Application\User\Domain\User;
 use Src\Application\User\Domain\ValueObjects\UserId;
 use Src\Application\User\Domain\ValueObjects\UserStore;
+use Src\Application\User\Domain\ValueObjects\UserUpdate;
 
 interface UserRepositoryContract
 {
@@ -26,6 +27,13 @@ interface UserRepositoryContract
      * @return User
      */
     public function store(UserStore $store): User;
+
+    /**
+     * @param UserId $id
+     * @param UserUpdate $update
+     * @return User
+     */
+    public function update(UserId $id, UserUpdate $update): User;
 
     /**
      * @param UserId $id

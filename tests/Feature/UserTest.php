@@ -84,6 +84,36 @@ class UserTest extends TestCase
      *
      * @return void
      */
+    public function test_feature_user_update_controller(): void
+    {
+        $appVersion = env("APP_VERSION");
+
+        $response = $this->withHeaders([
+            'Authorization' => env("API_KEY"),
+            'Authentication' => env("JWT_KEY_TEST")
+        ])->put('api/' . $appVersion . '/users/' . rand(5, 10), [
+            "user_name" => "test",
+            "first_name" => "test",
+            "second_name" => "test",
+            "first_last_name" => "test",
+            "second_last_name" => "test",
+            "email" =>  Str::random(10) . "@test.com",
+            "cellphone" => "1234567890",
+            "password" => "test",
+            "state_id" => 1
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            "error" => false
+        ]);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
     public function test_feature_user_destroy_controller(): void
     {
         $appVersion = env("APP_VERSION");

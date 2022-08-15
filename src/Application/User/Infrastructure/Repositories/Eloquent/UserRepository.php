@@ -6,6 +6,7 @@ use Src\Application\User\Domain\Contracts\UserRepositoryContract;
 use Src\Application\User\Domain\User;
 use Src\Application\User\Domain\ValueObjects\UserId;
 use Src\Application\User\Domain\ValueObjects\UserStore;
+use Src\Application\User\Domain\ValueObjects\UserUpdate;
 use Src\Application\User\Infrastructure\Repositories\Eloquent\User as Model;
 
 class UserRepository implements UserRepositoryContract
@@ -56,6 +57,26 @@ class UserRepository implements UserRepositoryContract
 
     /**
      * @param UserId $id
+     * @param UserUpdate $update
+     * @return User
+     */
+    public function update(UserId $id , UserUpdate $update): User
+    {
+        $record = $this->model->find($id->value());
+
+        if (is_null($record)) {
+            return $this->repositoryExceptions("User not found", 401);
+        }
+
+        return new User(($record->update($update->value())) ? [
+            "id" => $record->id,
+            "user_name" => $record->user_name,
+            "email" => $record->email
+        ] : null);
+    }
+
+    /**
+     * @param UserId $id
      * @return User
      */
     public function destroy(UserId $id): User
@@ -66,9 +87,7 @@ class UserRepository implements UserRepositoryContract
             return $this->repositoryExceptions("User not found", 401);
         }
 
-        $response = $record->delete();
-
-        return new User(($response) ? [
+        return new User(($record->delete()) ? [
             "id" => $record->id
         ]: null);
     }
