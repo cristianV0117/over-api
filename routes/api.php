@@ -13,7 +13,6 @@ use Src\Application\Home\Controllers\HomeController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 $appVersion = env("APP_VERSION");
 Route::get('/', static function () use ($appVersion) {
     return redirect('api/' . $appVersion);
@@ -22,3 +21,7 @@ Route::get('/', static function () use ($appVersion) {
 Route::get('/' . $appVersion, HomeController::class);
 
 Route::post($appVersion . '/users', \Src\Application\User\Infrastructure\Controllers\UserStoreController::class);
+
+Route::get($appVersion . '/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});

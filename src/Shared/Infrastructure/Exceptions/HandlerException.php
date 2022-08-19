@@ -38,6 +38,9 @@ class HandlerException extends Handler
     public function register()
     {
         $this->renderable(function (Throwable $e) {
+            if (app()->bound('sentry')) {
+                app('sentry')->captureException($e);
+            }
             if ($e instanceof CustomException) {
                 return response()->json($e->toException(), $e->getCode());
             }
