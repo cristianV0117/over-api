@@ -203,8 +203,10 @@ return [
         \Src\Application\User\Infrastructure\Services\DependencyServiceProvider::class,
         // MANAGEMENT - LOGIN //
         \Src\Management\Login\Infrastructure\Services\RouteServiceProvider::class,
-        \Src\Management\Login\Infrastructure\Services\DependencyServiceProvider::class
-
+        \Src\Management\Login\Infrastructure\Services\DependencyServiceProvider::class,
+        // MANAGEMENT - FORGOT //
+        \Src\Management\Forgot\Infrastructure\Services\RouteServiceProvider::class,
+        \Src\Management\Forgot\Infrastructure\Services\DependencyServiceProvider::class
     ],
 
     /*
