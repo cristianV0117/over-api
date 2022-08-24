@@ -40,8 +40,8 @@ final class ForgotUserForgotPasswordController extends CustomController
                 $this->useCase->__invoke($request->all())->entity(),
                 ["current" => '']
             );
-        } catch (\Exception) {
-            throw new MailFailedException("Mail send failed", 500);
+        } catch (\Exception $e) {
+            throw new MailFailedException($e->getMessage(), 500);
         }
     }
 }

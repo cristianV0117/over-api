@@ -5,7 +5,7 @@
             Para recuperar contraseña por favor darle click al boton.
         </center>
     </p>
-    @component('mail::button', ['url' => ''])
+    @component('mail::button', ['url' => $webDomain])
         Recuperar contraseña
     @endcomponent
 @endcomponent

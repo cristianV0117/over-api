@@ -37,6 +37,7 @@ final class CustomMail extends Mailable
     {
         return $this->from('overapp@gmail.com')
             ->subject('Recuperar contraseña OVER APP')
+            ->with('webDomain', $this->demo->resetPassword)
             ->markdown('mails.Forgot');
     }
 }

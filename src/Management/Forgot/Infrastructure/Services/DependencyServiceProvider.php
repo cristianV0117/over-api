@@ -20,6 +20,13 @@ class DependencyServiceProvider extends ServiceProvider
                 ],
                 "contract" => \Src\Management\Forgot\Domain\Contracts\ForgotMailableContract::class,
                 "repository" => \Src\Management\Forgot\Infrastructure\Mail\Mail\ForgotMailable::class
+            ],
+            [
+                "useCase" => [
+                    \Src\Management\Forgot\Application\Update\ForgotUserResetPasswordUseCase::class
+                ],
+                "contract" => \Src\Management\Forgot\Domain\Contracts\ForgotRepositoryContract::class,
+                "repository" => \Src\Management\Forgot\Infrastructure\Repositories\Eloquent\ForgotRepository::class
             ]
         ]);
         parent::__construct($app);

@@ -18,7 +18,7 @@ final class ForgotMailable implements ForgotMailableContract
     public function mail(ForgotMailableCriteria $mailable): Forgot
     {
         $response = Mail::to($mailable->value())
-            ->send(new CustomMail("hola"));
+            ->send(new CustomMail($mailable->object()));
 
         if (!$response) {
             return new Forgot(null);

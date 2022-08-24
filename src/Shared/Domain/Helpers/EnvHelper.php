@@ -29,4 +29,12 @@ trait EnvHelper
     {
         return env("API_JWT");
     }
+
+    /**
+     * @return string
+     */
+    public function webDomain(): string
+    {
+        return env("WEB_ROUTE");
+    }
 }
