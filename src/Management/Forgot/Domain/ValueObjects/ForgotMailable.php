@@ -23,7 +23,7 @@ final class ForgotMailable extends StringValueObject
     public function object(): stdClass
     {
         $object = new stdClass();
-        $object->resetPassword = $this->webDomain() . '/reset-password';
+        $object->resetPassword = $this->webDomain() . '/reset-password/' . base64_encode($this->value());
         return $object;
     }
 }
