@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Src\Management\Login\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\User\Infrastructure\Repositories\Eloquent\User as Model;
+use Src\Management\Logger\Infrastructure\Observers\LoggerLoginObserver;
+use Src\Management\Logger\Infrastructure\Observers\LoggerLoginSubject;
 use Src\Management\Login\Domain\Contracts\LoginRepositoryContract;
 use Src\Management\Login\Domain\Login;
 use Src\Management\Login\Domain\ValueObjects\LoginCriteria;
@@ -17,11 +19,20 @@ final class LoginRepository implements LoginRepositoryContract
     private Model $model;
 
     /**
-     * @param Model $model
+     * @var LoggerLoginSubject
      */
-    public function __construct(Model $model)
+    private LoggerLoginSubject $subject;
+
+    /**
+     * @param Model $model
+     * @param LoggerLoginSubject $subject
+     * @param LoggerLoginObserver $observer
+     */
+    public function __construct(Model $model, LoggerLoginSubject $subject, LoggerLoginObserver $observer)
     {
         $this->model = $model;
+        $this->subject = $subject;
+        $this->subject->attach($observer);
     }
 
     /**
@@ -42,6 +53,10 @@ final class LoginRepository implements LoginRepositoryContract
             return new Login(null);
         }
 
+        $this->subject->notifyUserLogin([
+            "user_id" => $user[0]["id"],
+            "type" => 1
+        ]);
         return new Login($user[0]);
     }
 

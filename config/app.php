@@ -206,7 +206,9 @@ return [
         \Src\Management\Login\Infrastructure\Services\DependencyServiceProvider::class,
         // MANAGEMENT - FORGOT //
         \Src\Management\Forgot\Infrastructure\Services\RouteServiceProvider::class,
-        \Src\Management\Forgot\Infrastructure\Services\DependencyServiceProvider::class
+        \Src\Management\Forgot\Infrastructure\Services\DependencyServiceProvider::class,
+        // MANAGEMENT - LOGGER //
+        \Src\Management\Logger\Infrastructure\Services\DependencyServiceProvider::class
     ],
 
     /*
