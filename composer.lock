@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00c6232f837e1cac4ac74ae51841643c",
+    "content-hash": "52b19bbecaf5055e5984fe4b9f8983de",
     "packages": [
+        {
+            "name": "baethon/laravel-criteria",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/baethon/laravel-criteria.git",
+                "reference": "d9bacc648d159dde702aa770183d4c289a403203"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/baethon/laravel-criteria/zipball/d9bacc648d159dde702aa770183d4c289a403203",
+                "reference": "d9bacc648d159dde702aa770183d4c289a403203",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "illuminate/database": "^5.6",
+                "phpunit/phpunit": "^7.2",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Baethon\\LaravelCriteria\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Radoslaw Mejer",
+                    "email": "radmen@radmen.info"
+                }
+            ],
+            "description": "Minimal interface for criteria pattern",
+            "support": {
+                "issues": "https://github.com/baethon/laravel-criteria/issues",
+                "source": "https://github.com/baethon/laravel-criteria/tree/master"
+            },
+            "time": "2018-06-29T11:57:14+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.10.2",
@@ -9283,5 +9328,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }

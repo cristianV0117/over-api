@@ -7,22 +7,22 @@ namespace Src\Shared\Domain\ValueObjects;
 abstract class CriteriaValueObject
 {
     /**
-     * @var array|object
+     * @var mixed
      */
-    private array|object $value;
+    private mixed $value;
 
     /**
-     * @param array|object $value
+     * @param mixed $value
      */
-    public function __construct(array|object $value)
+    public function __construct(mixed $value)
     {
         $this->value = $value;
     }
 
     /**
-     * @return array|object
+     * @return mixed
      */
-    public function value(): array|object
+    public function value(): mixed
     {
         return $this->value;
     }

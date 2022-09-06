@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 
+use Baethon\LaravelCriteria\Traits\AppliesCriteria;
 use Illuminate\Database\Eloquent\Model;
 
 final class User extends Model
 {
+    use AppliesCriteria;
+
     /**
      * @var string
      */

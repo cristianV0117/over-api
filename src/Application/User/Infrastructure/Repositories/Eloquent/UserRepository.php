@@ -4,6 +4,7 @@ namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\User\Domain\Contracts\UserRepositoryContract;
 use Src\Application\User\Domain\User;
+use Src\Application\User\Domain\ValueObjects\UserCriteria;
 use Src\Application\User\Domain\ValueObjects\UserId;
 use Src\Application\User\Domain\ValueObjects\UserStore;
 use Src\Application\User\Domain\ValueObjects\UserUpdate;
@@ -108,5 +109,18 @@ class UserRepository implements UserRepositoryContract
             "code" => $status
         ]);
         return $user;
+    }
+
+    /**
+     * @param UserCriteria $criteria
+     * @return User
+     */
+    public function findByCriteria(UserCriteria $criteria): User
+    {
+        $query = $this->model::query();
+
+        $query->apply($criteria->value());
+
+        return new User($query->get()->toArray());
     }
 }

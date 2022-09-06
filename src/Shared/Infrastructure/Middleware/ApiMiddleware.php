@@ -21,11 +21,11 @@ final class ApiMiddleware
     public function handle(Request $request, Closure $next): mixed
     {
         if (empty($request->header('authorization'))) {
-            throw new ApiAuthException("Not auth", 400);
+            throw new ApiAuthException("Not auth authorization is empty", 400);
         }
 
         if (env("API_KEY") !== $request->header('authorization')) {
-            throw new ApiAuthException("Not auth", 401);
+            throw new ApiAuthException("Not auth authorization is failed", 401);
         }
 
         return $next($request);
