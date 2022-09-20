@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             States::class,
             Users::class,
             CategoriesTasks::class,
-            Tasks::class
+            Tasks::class,
+            Roles::class,
+            UsersRoles::class
         ]);
     }
 }

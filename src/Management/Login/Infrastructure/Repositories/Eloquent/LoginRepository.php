@@ -47,17 +47,18 @@ final class LoginRepository implements LoginRepositoryContract
             return new Login(null);
         }
 
-        $check = $login->checkPassword($login->value()['password'], $user[0]['password']);
+        $check = $login->checkPassword($login->value()['password'], $user['password']);
 
         if (!$check) {
             return new Login(null);
         }
 
         $this->subject->notifyUserLogin([
-            "user_id" => $user[0]["id"],
+            "user_id" => $user["id"],
             "type" => 1
         ]);
-        return new Login($user[0]);
+
+        return new Login($user);
     }
 
     /**
@@ -70,10 +71,17 @@ final class LoginRepository implements LoginRepositoryContract
         string $userName
     ): ?array
     {
-        return $this->model->where('email', '=', $email)
+        return $this->model
+            ->with('roles')
+            ->where('email', '=', $email)
             ->orWhere('user_name', '=', $userName)
-            ->select('id', 'user_name', 'email', 'password')
-            ->get()
+            ->select(
+                'id',
+                'user_name',
+                'email',
+                'password',
+            )
+            ->first()
             ->makeVisible('password')
             ->toArray();
     }

@@ -6,10 +6,14 @@ namespace Src\Application\User\Infrastructure\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Src\Application\User\Application\Get\UserIndexUseCase;
+use Src\Management\Login\Infrastructure\Middleware\RoleMiddleware;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\RolesHelper;
 
 final class UserIndexController extends CustomController
 {
+    use RolesHelper;
+
     /**
      * @var UserIndexUseCase
      */
@@ -20,6 +24,9 @@ final class UserIndexController extends CustomController
      */
     public function __construct(UserIndexUseCase $useCase)
     {
+        $this->middleware(RoleMiddleware::class, [
+            'role' => $this->allRoles()
+        ]);
         $this->useCase = $useCase;
         parent::__construct();
     }

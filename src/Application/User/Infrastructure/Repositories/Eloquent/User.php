@@ -6,6 +6,8 @@ namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 
 use Baethon\LaravelCriteria\Traits\AppliesCriteria;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Src\Application\Role\Infrastructure\Repositories\Eloquent\Role;
 
 final class User extends Model
 {
@@ -31,7 +33,22 @@ final class User extends Model
         'state_id'
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'password'
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class,
+            'users_roles',
+            'user_id',
+            'role_id'
+        );
+    }
 }

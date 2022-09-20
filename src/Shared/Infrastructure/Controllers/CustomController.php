@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Src\Shared\Infrastructure\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Src\Shared\Infrastructure\Helper\ResponseHelper;
 
-abstract class CustomController
+abstract class CustomController extends Controller
 {
     use ResponseHelper;
 

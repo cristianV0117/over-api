@@ -43,8 +43,8 @@ final class LoginAuthUseCase
     {
         $login = $this->repository->login(new LoginCriteria($criteria));
         $this->loginStatus($login);
-        return new Login(array_merge($login->entity(), [
-            "jwt" => $this->authenticationUseCase->__invoke($login->entity())
+        return new Login(array_merge($login->handler(), [
+            "jwt" => $this->authenticationUseCase->__invoke($login->handler())
         ]));
     }
 

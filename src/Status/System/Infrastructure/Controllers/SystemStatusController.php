@@ -11,6 +11,9 @@ use Src\Status\System\Domain\Exceptions\StatusNotResponseException;
 
 final class SystemStatusController extends CustomController
 {
+    /**
+     * @var DB
+     */
     private DB $DB;
 
     public function __construct()

@@ -56,4 +56,17 @@ final class LoginAuthentication implements LoginAuthenticationContract
 
         return true;
     }
+
+    /**
+     * @param LoginJwt $jwt
+     * @return string
+     */
+    public function get(LoginJwt $jwt): mixed
+    {
+        return $this->jwt::decode(
+            $jwt->value(),
+            $jwt->secret(),
+            $jwt->encrypt()
+        )->data;
+    }
 }
