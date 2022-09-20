@@ -1,28 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\User\Domain\Contracts\UserRepositoryContract;
 use Src\Application\User\Domain\User;
-use Src\Application\User\Domain\ValueObjects\UserCriteria;
-use Src\Application\User\Domain\ValueObjects\UserId;
-use Src\Application\User\Domain\ValueObjects\UserStore;
-use Src\Application\User\Domain\ValueObjects\UserUpdate;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Application\User\Domain\ValueObjects\{
+    UserCriteria,
+    UserId,
+    UserStore,
+    UserUpdate
+};
 use Src\Application\User\Infrastructure\Repositories\Eloquent\User as Model;
 
-class UserRepository implements UserRepositoryContract
+final class UserRepository implements UserRepositoryContract
 {
-    /**
-     * @var Model
-     */
-    private Model $model;
+    use HttpCodesHelper;
 
     /**
      * @param Model $model
      */
-    public function __construct(Model $model)
+    public function __construct(private Model $model)
     {
-        $this->model = $model;
     }
 
     /**
@@ -50,9 +51,11 @@ class UserRepository implements UserRepositoryContract
     public function store(UserStore $store): User
     {
         $store = $this->model->create($store->handler());
+
         if (!$store) {
             return new User(null);
         }
+
         return new User($store->toArray());
     }
 
@@ -66,7 +69,7 @@ class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return $this->repositoryExceptions("User not found", 401);
+            return $this->repositoryExceptions("User not found", $this->notFound());
         }
 
         return new User(($record->update($update->value())) ? [
@@ -85,7 +88,7 @@ class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return $this->repositoryExceptions("User not found", 401);
+            return $this->repositoryExceptions("User not found", $this->notFound());
         }
 
         return new User(($record->delete()) ? [

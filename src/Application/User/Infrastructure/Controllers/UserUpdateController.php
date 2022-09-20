@@ -13,16 +13,10 @@ use Src\Shared\Infrastructure\Controllers\CustomController;
 final class UserUpdateController extends CustomController
 {
     /**
-     * @var UserUpdateUseCase
-     */
-    private UserUpdateUseCase $useCase;
-
-    /**
      * @param UserUpdateUseCase $useCase
      */
-    public function __construct(UserUpdateUseCase $useCase)
+    public function __construct(private UserUpdateUseCase $useCase)
     {
-        $this->useCase = $useCase;
         parent::__construct();
     }
 

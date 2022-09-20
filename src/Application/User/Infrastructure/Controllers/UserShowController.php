@@ -12,16 +12,10 @@ use Src\Shared\Infrastructure\Controllers\CustomController;
 final class UserShowController extends CustomController
 {
     /**
-     * @var UserShowUseCase
-     */
-    private UserShowUseCase $useCase;
-
-    /**
      * @param UserShowUseCase $useCase
      */
-    public function __construct(UserShowUseCase $useCase)
+    public function __construct(private UserShowUseCase $useCase)
     {
-        $this->useCase = $useCase;
         parent::__construct();
     }
 

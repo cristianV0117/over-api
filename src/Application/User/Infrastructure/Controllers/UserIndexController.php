@@ -15,19 +15,13 @@ final class UserIndexController extends CustomController
     use RolesHelper;
 
     /**
-     * @var UserIndexUseCase
-     */
-    private UserIndexUseCase $useCase;
-
-    /**
      * @param UserIndexUseCase $useCase
      */
-    public function __construct(UserIndexUseCase $useCase)
+    public function __construct(private UserIndexUseCase $useCase)
     {
         $this->middleware(RoleMiddleware::class, [
             'role' => $this->allRoles()
         ]);
-        $this->useCase = $useCase;
         parent::__construct();
     }
 

@@ -11,16 +11,10 @@ use Src\Application\User\Domain\ValueObjects\UserStore;
 final class UserStoreUseCase
 {
     /**
-     * @var UserRepositoryContract
-     */
-    private UserRepositoryContract $repository;
-
-    /**
      * @param UserRepositoryContract $repository
      */
-    public function __construct(UserRepositoryContract $repository)
+    public function __construct(private UserRepositoryContract $repository)
     {
-        $this->repository = $repository;
     }
 
     /**

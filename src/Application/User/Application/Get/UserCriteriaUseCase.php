@@ -23,7 +23,7 @@ final class UserCriteriaUseCase
      * @param array $criteria
      * @return User
      */
-    public function __invoke(mixed $criteria)
+    public function __invoke(mixed $criteria): User
     {
         return $this->repository->findByCriteria(new UserCriteria($criteria));
     }

@@ -6,7 +6,7 @@ namespace Src\Application\User\Infrastructure\Services;
 
 use Src\Shared\Infrastructure\Services\DependencyServiceProvider as ServiceProvider;
 
-class DependencyServiceProvider extends ServiceProvider
+final class DependencyServiceProvider extends ServiceProvider
 {
     /**
      * @param $app

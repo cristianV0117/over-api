@@ -7,11 +7,12 @@ namespace Src\Application\User\Infrastructure\Request;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Src\Application\User\Domain\Exceptions\UserRequestFailedException;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 use Src\Shared\Infrastructure\Helper\RequestHelper;
 
 final class UserUpdateRequest extends FormRequest
 {
-    use RequestHelper;
+    use RequestHelper, HttpCodesHelper;
 
     /**
      * @return string[]
@@ -38,6 +39,6 @@ final class UserUpdateRequest extends FormRequest
      */
     public function failedValidation(Validator $validator): void
     {
-        throw new UserRequestFailedException($this->formatErrorsRequest($validator->errors()->all()), 400);
+        throw new UserRequestFailedException($this->formatErrorsRequest($validator->errors()->all()), $this->badRequest());
     }
 }

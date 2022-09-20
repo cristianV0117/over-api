@@ -7,11 +7,6 @@ namespace Src\Shared\Domain;
 abstract class Domain
 {
     /**
-     * @var mixed
-     */
-    private mixed $entity;
-
-    /**
      * @var array|bool|null
      */
     private array|null|bool $exception;
@@ -19,9 +14,8 @@ abstract class Domain
     /**
      * @param mixed $entity
      */
-    public function __construct(mixed $entity)
+    public function __construct(private mixed $entity)
     {
-        $this->entity = $entity;
     }
 
     /**

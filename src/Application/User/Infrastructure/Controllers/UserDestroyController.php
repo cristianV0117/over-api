@@ -12,16 +12,10 @@ use Src\Shared\Infrastructure\Controllers\CustomController;
 final class UserDestroyController extends CustomController
 {
     /**
-     * @var UserDestroyUseCase
-     */
-    private UserDestroyUseCase $useCase;
-
-    /**
      * @param UserDestroyUseCase $useCase
      */
-    public function __construct(UserDestroyUseCase $useCase)
+    public function __construct(private UserDestroyUseCase $useCase)
     {
-        $this->useCase = $useCase;
         parent::__construct();
     }
 
