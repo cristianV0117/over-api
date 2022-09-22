@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Shared\Domain\Exceptions;
 
-class CustomException extends \Exception
+abstract class CustomException extends \Exception
 {
     /**
      * @return array

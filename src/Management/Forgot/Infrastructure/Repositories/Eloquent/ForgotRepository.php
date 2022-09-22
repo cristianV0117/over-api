@@ -13,16 +13,10 @@ use Src\Application\User\Infrastructure\Repositories\Eloquent\User as Model;
 final class ForgotRepository implements ForgotRepositoryContract
 {
     /**
-     * @var Model
-     */
-    private Model $model;
-
-    /**
      * @param Model $model
      */
-    public function __construct(Model $model)
+    public function __construct(private Model $model)
     {
-        $this->model = $model;
     }
 
     /**

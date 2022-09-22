@@ -11,19 +11,23 @@ trait AuthHelper
      */
     public function aud(): string
     {
+        $aud = '';
+
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $aud = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        }
+
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $aud = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+        }
+
+        if (!empty($_SERVER['REMOTE_ADDR'])) {
             $aud = $_SERVER['REMOTE_ADDR'];
-        } else {
-            $aud = null;
         }
 
         $aud .= @$_SERVER['HTTP_USER_AGENT'];
         $aud .= gethostname();
 
-        return sha1($aud);
+        return sha1($aud ?? null);
     }
 }

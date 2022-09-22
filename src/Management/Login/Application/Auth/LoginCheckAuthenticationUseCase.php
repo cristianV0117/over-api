@@ -11,16 +11,10 @@ use Src\Management\Login\Domain\ValueObjects\LoginJwt;
 final class LoginCheckAuthenticationUseCase
 {
     /**
-     * @var LoginAuthenticationContract
-     */
-    private LoginAuthenticationContract $authentication;
-
-    /**
      * @param LoginAuthenticationContract $authentication
      */
-    public function __construct(LoginAuthenticationContract $authentication)
+    public function __construct(private LoginAuthenticationContract $authentication)
     {
-        $this->authentication = $authentication;
     }
 
     /**

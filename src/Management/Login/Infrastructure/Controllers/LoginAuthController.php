@@ -13,16 +13,10 @@ use Src\Shared\Infrastructure\Controllers\CustomController;
 final class LoginAuthController extends CustomController
 {
     /**
-     * @var LoginAuthUseCase
-     */
-    private LoginAuthUseCase $useCase;
-
-    /**
      * @param LoginAuthUseCase $useCase
      */
-    public function __construct(LoginAuthUseCase $useCase)
+    public function __construct(private LoginAuthUseCase $useCase)
     {
-        $this->useCase = $useCase;
         parent::__construct();
     }
 

@@ -12,16 +12,10 @@ use Src\Management\Forgot\Domain\ValueObjects\ForgotMailable;
 final class ForgotUserForgotPasswordUseCase
 {
     /**
-     * @var ForgotMailableContract
-     */
-    private ForgotMailableContract $mailable;
-
-    /**
      * @param ForgotMailableContract $mailable
      */
-    public function __construct(ForgotMailableContract $mailable)
+    public function __construct(private ForgotMailableContract $mailable)
     {
-        $this->mailable = $mailable;
     }
 
     /**

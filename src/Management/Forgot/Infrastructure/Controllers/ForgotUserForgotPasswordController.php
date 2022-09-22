@@ -13,16 +13,10 @@ use Src\Shared\Infrastructure\Controllers\CustomController;
 final class ForgotUserForgotPasswordController extends CustomController
 {
     /**
-     * @var ForgotUserForgotPasswordUseCase
-     */
-    private ForgotUserForgotPasswordUseCase $useCase;
-
-    /**
      * @param ForgotUserForgotPasswordUseCase $useCase
      */
-    public function __construct(ForgotUserForgotPasswordUseCase $useCase)
+    public function __construct(private ForgotUserForgotPasswordUseCase $useCase)
     {
-        $this->useCase = $useCase;
         parent::__construct();
     }
 

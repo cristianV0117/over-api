@@ -12,6 +12,9 @@ abstract class CustomController extends Controller
 {
     use ResponseHelper;
 
+    /**
+     * @var mixed
+     */
     private mixed $api;
 
     public function __construct()

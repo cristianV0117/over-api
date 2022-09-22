@@ -13,16 +13,10 @@ use Src\Shared\Infrastructure\Controllers\CustomController;
 final class ForgotUserResetPasswordController extends CustomController
 {
     /**
-     * @var ForgotUserResetPasswordUseCase
-     */
-    private ForgotUserResetPasswordUseCase $useCase;
-
-    /**
      * @param ForgotUserResetPasswordUseCase $useCase
      */
-    public function __construct(ForgotUserResetPasswordUseCase $useCase)
+    public function __construct(private ForgotUserResetPasswordUseCase $useCase)
     {
-        $this->useCase = $useCase;
         parent::__construct();
     }
 

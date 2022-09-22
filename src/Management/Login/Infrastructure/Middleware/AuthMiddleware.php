@@ -11,12 +11,11 @@ use Closure;
 
 final class AuthMiddleware
 {
-
-    private LoginCheckAuthenticationUseCase $authenticationUseCase;
-
-    public function __construct(LoginCheckAuthenticationUseCase $authenticationUseCase)
+    /**
+     * @param LoginCheckAuthenticationUseCase $authenticationUseCase
+     */
+    public function __construct(private LoginCheckAuthenticationUseCase $authenticationUseCase)
     {
-        $this->authenticationUseCase = $authenticationUseCase;
     }
 
     /**

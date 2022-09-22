@@ -12,16 +12,10 @@ use Src\Management\Forgot\Domain\ValueObjects\ForgotReset;
 final class ForgotUserResetPasswordUseCase
 {
     /**
-     * @var ForgotRepositoryContract
-     */
-    private ForgotRepositoryContract $repository;
-
-    /**
      * @param ForgotRepositoryContract $repository
      */
-    public function __construct(ForgotRepositoryContract $repository)
+    public function __construct(private ForgotRepositoryContract $repository)
     {
-        $this->repository = $repository;
     }
 
     /**

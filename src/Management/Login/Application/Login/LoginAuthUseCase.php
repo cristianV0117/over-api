@@ -13,25 +13,14 @@ use Src\Management\Login\Domain\ValueObjects\LoginCriteria;
 final class LoginAuthUseCase
 {
     /**
-     * @var LoginRepositoryContract
-     */
-    private LoginRepositoryContract $repository;
-    /**
-     * @var LoginAuthenticationUseCase
-     */
-    private LoginAuthenticationUseCase $authenticationUseCase;
-
-    /**
      * @param LoginRepositoryContract $repository
      * @param LoginAuthenticationUseCase $authenticationUseCase
      */
     public function __construct(
-        LoginRepositoryContract $repository,
-        LoginAuthenticationUseCase $authenticationUseCase
+        private LoginRepositoryContract $repository,
+        private LoginAuthenticationUseCase $authenticationUseCase
     )
     {
-        $this->repository = $repository;
-        $this->authenticationUseCase = $authenticationUseCase;
     }
 
     /**
