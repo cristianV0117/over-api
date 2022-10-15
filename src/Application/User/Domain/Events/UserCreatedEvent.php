@@ -54,7 +54,7 @@ final class UserCreatedEvent
      */
     private function markdown(): string
     {
-        return 'Mails.UserCreated';
+        return 'mails.UserCreated';
     }
 
     /**
