@@ -47,7 +47,7 @@ final class LoginAuthentication implements LoginAuthenticationContract
                 $jwt->encrypt()
             );
 
-            dump($decode);
+            dump($decode, $jwt->aud());
 
             if ($decode->aud !== $jwt->aud()) {
                 return false;
