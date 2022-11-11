@@ -65,6 +65,6 @@ final class LoginAuthentication implements LoginAuthenticationContract
             $jwt->value(),
             $jwt->secret(),
             $jwt->encrypt()
-        )->data;
+        )[0]->data;
     }
 }
