@@ -29,7 +29,9 @@ final class LoginAuthentication implements LoginAuthenticationContract
     public function auth(LoginAuthenticationCriteria $authentication): string
     {
         return $this->jwt::encode(
-            $authentication->handler(),
+            [
+                $authentication->handler()
+            ],
             $authentication->private()
         );
     }
@@ -47,9 +49,7 @@ final class LoginAuthentication implements LoginAuthenticationContract
                 $jwt->encrypt()
             );
 
-            dump($decode, $jwt->aud());
-
-            if ($decode->aud !== $jwt->aud()) {
+            if ($decode[0]->aud !== $jwt->aud()) {
                 return false;
             }
         } catch (Exception) {

@@ -32,6 +32,7 @@ final class LoginAuthentication extends CriteriaValueObject
     public function handler(): array
     {
         return [
+            'iat' => time(),
             'exp' => $this->time(),
             'aud' => $this->aud(),
             'data' => $this->handler
