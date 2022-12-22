@@ -23,27 +23,9 @@ final class UserUpdateUseCase
      * @param array $update
      * @param int $id
      * @return User
-     * @throws UserUpdateException
      */
     public function __invoke(array $update, int $id): User
     {
-        $update = $this->repository->update(new UserId($id), new UserUpdate($update));
-        $this->statusUpdate($update);
-        return $update;
-    }
-
-    /**
-     * @param User $update
-     * @return void
-     * @throws UserUpdateException
-     */
-    private function statusUpdate(User $update): void
-    {
-        if (is_null($update->entity())) {
-            throw new UserUpdateException(
-                $update->exceptionMessage() ?? "An error has occurred",
-                $update->exceptionCode() ?? 500
-            );
-        }
+        return $this->repository->update(new UserId($id), new UserUpdate($update));
     }
 }

@@ -22,7 +22,6 @@ final class UserShowController extends CustomController
     /**
      * @param int $id
      * @return JsonResponse
-     * @throws UserNotFoundException
      */
     public function __invoke(int $id): JsonResponse
     {

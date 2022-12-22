@@ -7,15 +7,15 @@ namespace Src\Shared\Domain;
 abstract class Domain
 {
     /**
-     * @var array|bool|null
-     */
-    private array|null|bool $exception;
-
-    /**
      * @param mixed $entity
+     * @param string|null $exception
      */
-    public function __construct(private mixed $entity)
+    public function __construct(
+        private mixed $entity = null,
+        private null|string $exception = null
+    )
     {
+        $this->isException($this->exception);
     }
 
     /**
@@ -27,35 +27,8 @@ abstract class Domain
     }
 
     /**
-     * @param array|bool|null $exception
+     * @param string|null $exception
      * @return void
      */
-    public function setException(array|null|bool $exception): void
-    {
-        $this->exception = $exception;
-    }
-
-    /**
-     * @return bool|array|null
-     */
-    public function exception(): bool|array|null
-    {
-        return $this->exception;
-    }
-
-    /**
-     * @return int
-     */
-    public function exceptionCode(): int
-    {
-        return $this->exception["code"];
-    }
-
-    /**
-     * @return string
-     */
-    public function exceptionMessage(): string
-    {
-        return $this->exception["message"];
-    }
+    protected abstract function isException(?string $exception): void;
 }

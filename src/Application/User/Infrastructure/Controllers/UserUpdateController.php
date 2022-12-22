@@ -24,7 +24,6 @@ final class UserUpdateController extends CustomController
      * @param UserUpdateRequest $request
      * @param int $id
      * @return JsonResponse
-     * @throws UserUpdateException
      */
     public function __invoke(UserUpdateRequest $request, int $id): JsonResponse
     {

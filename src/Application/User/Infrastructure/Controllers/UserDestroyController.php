@@ -22,7 +22,6 @@ final class UserDestroyController extends CustomController
     /**
      * @param int $id
      * @return JsonResponse
-     * @throws UserDestroyFailedException
      */
     public function __invoke(int $id): JsonResponse
     {
