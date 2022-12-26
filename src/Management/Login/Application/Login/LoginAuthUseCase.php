@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Src\Management\Login\Application\Login;
 
-use Illuminate\Support\Facades\Log;
 use Src\Management\Login\Application\Auth\LoginAuthenticationUseCase;
 use Src\Management\Login\Domain\Contracts\LoginRepositoryContract;
 use Src\Management\Login\Domain\Login;
