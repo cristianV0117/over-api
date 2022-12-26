@@ -44,19 +44,14 @@ final class LoginRepository implements LoginRepositoryContract
         $user = $this->userByEmailAndUserName($login->value()['email'], $login->value()['user_name']);
 
         if (empty($user)) {
-            return new Login(null);
+            return new Login(null, 'USER_OR_PASSWORD_INCORRECT');
         }
 
         $check = $login->checkPassword($login->value()['password'], $user['password']);
 
         if (!$check) {
-            return new Login(null);
+            return new Login(null, 'USER_OR_PASSWORD_INCORRECT');
         }
-
-        $this->subject->notifyUserLogin([
-            "user_id" => $user["id"],
-            "type" => 1
-        ]);
 
         return new Login($user);
     }

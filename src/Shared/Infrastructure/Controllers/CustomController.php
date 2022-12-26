@@ -33,7 +33,7 @@ abstract class CustomController extends Controller
         int $status,
         bool $error,
         array|string|int|bool $response,
-        ?array $dependencies
+        ?array $dependencies = null
     ): JsonResponse
     {
         return response()->json(

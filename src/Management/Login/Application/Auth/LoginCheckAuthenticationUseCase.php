@@ -36,7 +36,7 @@ final class LoginCheckAuthenticationUseCase
     private function authStatus(bool $auth): void
     {
         if (!$auth) {
-            throw new AuthException("invalid token or invalid user", 401);
+            throw new AuthException("invalid token or invalid user or expired token", 401);
         }
     }
 

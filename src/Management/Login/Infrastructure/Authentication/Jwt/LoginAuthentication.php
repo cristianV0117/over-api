@@ -43,11 +43,14 @@ final class LoginAuthentication implements LoginAuthenticationContract
     public function check(LoginJwt $jwt): bool
     {
         try {
-            $this->jwt::decode(
+            $decode = $this->jwt::decode(
                 $jwt->value(),
                 $jwt->secret(),
                 $jwt->encrypt()
             );
+            if (time() > $decode[0]->exp) {
+                return false;
+            }
         } catch (Exception) {
             return false;
         }

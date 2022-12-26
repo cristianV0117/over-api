@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 use Src\Management\Login\Application\Login\LoginAuthUseCase;
 use Src\Management\Login\Domain\Exceptions\NotLoginException;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 
 final class LoginAuthController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param LoginAuthUseCase $useCase
      */
@@ -28,10 +31,9 @@ final class LoginAuthController extends CustomController
     public function __invoke(Request $request): JsonResponse
     {
         return $this->defaultJsonResponse(
-            200,
+            $this->ok(),
             false,
-            $this->useCase->__invoke($request->all())->entity(),
-            ['current' => '']
+            $this->useCase->__invoke($request->all())->entity()
         );
     }
 }
