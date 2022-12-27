@@ -30,7 +30,7 @@ final class UserStoreUseCase
     public function __invoke(array $store): User
     {
         $store = $this->repository->store(new UserStore($store));
-        $this->userCreatedUseCase->__invoke((new UserCreatedEvent($store))->mailNotification());
+        $this->userCreatedUseCase->__invoke((new UserCreatedEvent($store)));
         return $store;
     }
 }

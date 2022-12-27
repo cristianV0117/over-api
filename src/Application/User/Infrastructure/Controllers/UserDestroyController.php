@@ -28,8 +28,7 @@ final class UserDestroyController extends CustomController
         return $this->defaultJsonResponse(
             200,
             false,
-            $this->useCase->__invoke($id)->entity(),
-            ['current' => '']
+            $this->useCase->__invoke($id)->entity()
         );
     }
 }

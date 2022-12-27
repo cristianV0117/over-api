@@ -8,10 +8,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Router;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 use Src\Shared\Infrastructure\Helper\HateoasHelper;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 
 final class HomeController extends CustomController
 {
-    use HateoasHelper;
+    use HateoasHelper, HttpCodesHelper;
 
     /**
      * @param Router $router
@@ -20,15 +21,14 @@ final class HomeController extends CustomController
     public function __invoke(Router $router): JsonResponse
     {
         return $this->defaultJsonResponse(
-            200,
+            $this->ok(),
             false,
             [
                 "over" => "OVER API",
                 "home" => "Bienvenido",
                 "version" => env("APP_SPECIFIC_VERSION"),
                 "hateoas" => $this->hateoas($router->getRoutes())
-            ],
-            ['current' => '']
+            ]
         );
     }
 }

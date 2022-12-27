@@ -33,8 +33,7 @@ final class UserCriteriaController extends CustomController
             false,
             $this->useCase->__invoke(
                 (new HandlerCriteria($request->toArray()))->criteria()
-            )->entity(),
-            ['current' => '']
+            )->entity()
         );
     }
 }

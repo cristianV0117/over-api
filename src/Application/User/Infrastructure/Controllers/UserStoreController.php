@@ -28,8 +28,7 @@ final class UserStoreController extends CustomController
         return $this->defaultJsonResponse(
             201,
             false,
-            $this->useCase->__invoke($request->all())->entity(),
-            ['current' => '']
+            $this->useCase->__invoke($request->all())->entity()
         );
     }
 }

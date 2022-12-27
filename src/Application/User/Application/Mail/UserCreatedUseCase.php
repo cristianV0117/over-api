@@ -3,6 +3,7 @@
 namespace Src\Application\User\Application\Mail;
 
 use Src\Application\User\Domain\Contracts\UserMailContract;
+use Src\Application\User\Domain\Events\UserCreatedEvent;
 
 final class UserCreatedUseCase
 {
@@ -13,8 +14,12 @@ final class UserCreatedUseCase
     {
     }
 
-    public function __invoke(\stdClass $mail)
+    /**
+     * @param UserCreatedEvent $mail
+     * @return void
+     */
+    public function __invoke(UserCreatedEvent $mail): void
     {
-        $this->userMail->mail($mail);
+        $this->userMail->userCreatedNotify($mail);
     }
 }

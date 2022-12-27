@@ -30,8 +30,7 @@ final class UserUpdateController extends CustomController
         return $this->defaultJsonResponse(
             200,
             false,
-            $this->useCase->__invoke($request->all(), $id)->entity(),
-            ["current" => ""]
+            $this->useCase->__invoke($request->all(), $id)->entity()
         );
     }
 }
