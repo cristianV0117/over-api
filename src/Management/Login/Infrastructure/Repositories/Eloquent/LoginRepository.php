@@ -55,7 +55,7 @@ final class LoginRepository implements LoginRepositoryContract
         string $userName
     ): ?array
     {
-        return $this->model
+        $user = $this->model
             ->with('roles')
             ->where('email', '=', $email)
             ->orWhere('user_name', '=', $userName)
@@ -65,8 +65,9 @@ final class LoginRepository implements LoginRepositoryContract
                 'email',
                 'password',
             )
-            ->first()
-            ->makeVisible('password')
+            ->first();
+
+        return $user?->makeVisible('password')
             ->toArray();
     }
 }
