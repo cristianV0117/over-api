@@ -8,6 +8,7 @@ use Src\Management\Login\Domain\Exceptions\NotLoginException;
 use Src\Management\Login\Domain\Exceptions\NotRoleException;
 use Src\Shared\Domain\Domain;
 use Src\Shared\Domain\Helpers\HttpCodesHelper;
+use function Clue\StreamFilter\fun;
 
 final class Login extends Domain
 {
@@ -38,10 +39,9 @@ final class Login extends Domain
             "id" => $this->entity()["id"],
             "user_name" => $this->entity()["user_name"],
             "email" => $this->entity()["email"],
-            "roles" => [
-                "id" => $this->entity()["roles"][0]["id"] ?? self::ID_ROLE_DEFAULT,
-                "name" => $this->entity()["roles"][0]["name"] ?? self::NAME_ROLE_DEFAULT
-            ]
+            "roles" => array_map(function ($value) {
+                return $value;
+            }, $this->entity()["roles"])
         ];
     }
 
@@ -49,7 +49,7 @@ final class Login extends Domain
      * @return bool
      * @throws NotRoleException|NotLoginException
      */
-    public function isUserCheckRole(): bool
+    private function isUserCheckRole(): bool
     {
         if (
             !array_key_exists("user", $this->entity()) &&
@@ -59,10 +59,9 @@ final class Login extends Domain
         }
 
         if (is_array($this->entity()["typeRoles"])) {
-            if (!in_array($this->entity()["user"]->roles->name, $this->entity()["typeRoles"])) {
+            if (!$this->checkIsRoleValidInListOfRoles()) {
                 $this->isException('ROLE_NOT_HAVE_PERMISSIONS');
             }
-
             return true;
         }
 
@@ -70,8 +69,42 @@ final class Login extends Domain
             return true;
         }
 
-        if ($this->entity()["user"]->roles->name !== $this->entity()["typeRoles"]) {
+        if (!$this->checkIsRoleValid()) {
             $this->isException('ROLE_NOT_HAVE_PERMISSIONS');
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    private function checkIsRoleValidInListOfRoles(): bool
+    {
+        $userRoles = array_map(function ($value) {
+           return $value->name;
+        }, $this->entity()["user"]->roles);
+
+        $response = array_intersect($this->entity()["typeRoles"], $userRoles);
+
+        if (empty($response)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    private function checkIsRoleValid(): bool
+    {
+        $check = array_map(function ($value) {
+            return $value->name == $this->entity()["typeRoles"];
+        }, $this->entity()["user"]->roles);
+
+        if (!in_array(true, $check)) {
+            return false;
         }
 
         return true;

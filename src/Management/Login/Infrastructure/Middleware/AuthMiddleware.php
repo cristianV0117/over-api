@@ -33,7 +33,11 @@ final class AuthMiddleware
             throw new AuthException("Not jwt auth", $this->badRequest());
         }
 
-        $this->authenticationUseCase->__invoke($request->header('authentication'));
+        $auth = $this->authenticationUseCase->__invoke($request->header('authentication'));
+
+        if (!$auth) {
+            throw new AuthException("invalid token or invalid user or expired token", 401);
+        }
 
         return $next($request);
     }
