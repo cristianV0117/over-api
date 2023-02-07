@@ -20,7 +20,7 @@ final class HomeController extends CustomController
      */
     public function __invoke(Router $router): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             $this->ok(),
             false,
             [

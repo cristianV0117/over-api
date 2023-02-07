@@ -14,7 +14,7 @@ final class UserShowController extends CustomController
     /**
      * @param UserShowUseCase $useCase
      */
-    public function __construct(private UserShowUseCase $useCase)
+    public function __construct(private readonly UserShowUseCase $useCase)
     {
         parent::__construct();
     }
@@ -25,7 +25,7 @@ final class UserShowController extends CustomController
      */
     public function __invoke(int $id): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             200,
             false,
             $this->useCase->__invoke($id)->entity(),

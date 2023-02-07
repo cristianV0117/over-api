@@ -30,7 +30,7 @@ final class UserIndexController extends CustomController
      */
     public function __invoke(): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             200,
             false,
             $this->useCase->__invoke()->entity(),

@@ -19,7 +19,7 @@ final class ForgotUserForgotPasswordController extends CustomController
     /**
      * @param ForgotUserForgotPasswordUseCase $useCase
      */
-    public function __construct(private ForgotUserForgotPasswordUseCase $useCase)
+    public function __construct(private readonly ForgotUserForgotPasswordUseCase $useCase)
     {
         parent::__construct();
     }
@@ -32,7 +32,7 @@ final class ForgotUserForgotPasswordController extends CustomController
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            return $this->defaultJsonResponse(
+            return $this->json(
                 $this->ok(),
                 false,
                 $this->useCase->__invoke($request->all())->entity()

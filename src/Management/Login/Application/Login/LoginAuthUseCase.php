@@ -16,8 +16,8 @@ final class LoginAuthUseCase
      * @param LoginAuthenticationUseCase $authenticationUseCase
      */
     public function __construct(
-        private LoginRepositoryContract $repository,
-        private LoginAuthenticationUseCase $authenticationUseCase
+        private readonly LoginRepositoryContract $repository,
+        private readonly LoginAuthenticationUseCase $authenticationUseCase
     )
     {
     }

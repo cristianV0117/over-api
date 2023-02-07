@@ -8,5 +8,4 @@ use Src\Shared\Domain\ValueObjects\CriteriaValueObject;
 
 final class UserCriteria extends CriteriaValueObject
 {
-
 }

@@ -3,14 +3,21 @@
 namespace Src\Application\Role\Application\Get;
 
 use Src\Application\Role\Domain\Contracts\RoleRepositoryContract;
+use Src\Application\Role\Domain\Role;
 
 final class RoleIndexUseCase
 {
-    public function __construct(private RoleRepositoryContract $roleRepositoryContract)
+    /**
+     * @param RoleRepositoryContract $roleRepositoryContract
+     */
+    public function __construct(private readonly RoleRepositoryContract $roleRepositoryContract)
     {
     }
 
-    public function __invoke()
+    /**
+     * @return Role
+     */
+    public function __invoke(): Role
     {
         return $this->roleRepositoryContract->index();
     }

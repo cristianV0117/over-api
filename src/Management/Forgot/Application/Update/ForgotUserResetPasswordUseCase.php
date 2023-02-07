@@ -13,7 +13,7 @@ final class ForgotUserResetPasswordUseCase
     /**
      * @param ForgotRepositoryContract $repository
      */
-    public function __construct(private ForgotRepositoryContract $repository)
+    public function __construct(private readonly ForgotRepositoryContract $repository)
     {
     }
 

@@ -14,7 +14,7 @@ final class ForgotUserResetPasswordController extends CustomController
     /**
      * @param ForgotUserResetPasswordUseCase $useCase
      */
-    public function __construct(private ForgotUserResetPasswordUseCase $useCase)
+    public function __construct(private readonly ForgotUserResetPasswordUseCase $useCase)
     {
         parent::__construct();
     }
@@ -25,7 +25,7 @@ final class ForgotUserResetPasswordController extends CustomController
      */
     public function __invoke(Request $request): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             200,
             false,
             $this->useCase->__invoke($request->all())->entity()

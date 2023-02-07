@@ -8,5 +8,4 @@ use Src\Shared\Domain\Exceptions\CustomException;
 
 final class UserDestroyFailedException extends CustomException
 {
-
 }

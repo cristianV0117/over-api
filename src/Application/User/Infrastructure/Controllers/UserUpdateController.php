@@ -15,7 +15,7 @@ final class UserUpdateController extends CustomController
     /**
      * @param UserUpdateUseCase $useCase
      */
-    public function __construct(private UserUpdateUseCase $useCase)
+    public function __construct(private readonly UserUpdateUseCase $useCase)
     {
         parent::__construct();
     }
@@ -27,7 +27,7 @@ final class UserUpdateController extends CustomController
      */
     public function __invoke(UserUpdateRequest $request, int $id): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             200,
             false,
             $this->useCase->__invoke($request->all(), $id)->entity()

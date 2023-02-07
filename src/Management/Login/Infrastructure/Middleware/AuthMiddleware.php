@@ -17,7 +17,7 @@ final class AuthMiddleware
     /**
      * @param LoginCheckAuthenticationUseCase $authenticationUseCase
      */
-    public function __construct(private LoginCheckAuthenticationUseCase $authenticationUseCase)
+    public function __construct(private readonly LoginCheckAuthenticationUseCase $authenticationUseCase)
     {
     }
 

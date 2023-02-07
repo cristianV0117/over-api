@@ -15,7 +15,7 @@ final class UserUpdateUseCase
     /**
      * @param UserRepositoryContract $repository
      */
-    public function __construct(private UserRepositoryContract $repository)
+    public function __construct(private readonly UserRepositoryContract $repository)
     {
     }
 

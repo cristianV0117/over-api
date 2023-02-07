@@ -9,7 +9,7 @@ abstract class IntValueObject
     /**
      * @param int $value
      */
-    public function __construct(private int $value)
+    public function __construct(private readonly int $value)
     {
     }
 

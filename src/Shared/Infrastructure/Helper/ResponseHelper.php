@@ -14,7 +14,7 @@ trait ResponseHelper
      * @param array|null $dependencies
      * @return array
      */
-    public function json(
+    public function responseForJson(
         int $status,
         bool $error,
         array|string|int|bool $response,

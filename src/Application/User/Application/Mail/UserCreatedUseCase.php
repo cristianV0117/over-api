@@ -10,7 +10,7 @@ final class UserCreatedUseCase
     /**
      * @param UserMailContract $userMail
      */
-    public function __construct(private UserMailContract $userMail)
+    public function __construct(private readonly UserMailContract $userMail)
     {
     }
 

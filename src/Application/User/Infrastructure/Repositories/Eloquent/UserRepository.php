@@ -70,7 +70,7 @@ final class UserRepository implements UserRepositoryContract
             return (new User(null, "USER_NOT_FOUND"));
         }
 
-        return ($record->update($update->value())) ? new User([
+        return ($record->update($update->handler())) ? new User([
             "id" => $record->id,
             "user_name" => $record->user_name,
             "email" => $record->email

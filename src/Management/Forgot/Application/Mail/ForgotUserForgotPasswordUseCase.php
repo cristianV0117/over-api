@@ -13,7 +13,7 @@ final class ForgotUserForgotPasswordUseCase
     /**
      * @param ForgotMailableContract $mailable
      */
-    public function __construct(private ForgotMailableContract $mailable)
+    public function __construct(private readonly ForgotMailableContract $mailable)
     {
     }
 

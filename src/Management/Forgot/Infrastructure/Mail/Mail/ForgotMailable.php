@@ -26,7 +26,7 @@ final class ForgotMailable implements ForgotMailableContract
 
         return new Forgot([
             "email" => $mailable->value(),
-            "custom" => "mensaje enviado"
+            "custom" => "Mail send"
         ]);
     }
 }

@@ -14,7 +14,7 @@ final class ForgotRepository implements ForgotRepositoryContract
     /**
      * @param Model $model
      */
-    public function __construct(private Model $model)
+    public function __construct(private readonly Model $model)
     {
     }
 

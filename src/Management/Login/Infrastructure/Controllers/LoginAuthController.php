@@ -17,7 +17,7 @@ final class LoginAuthController extends CustomController
     /**
      * @param LoginAuthUseCase $useCase
      */
-    public function __construct(private LoginAuthUseCase $useCase)
+    public function __construct(private readonly LoginAuthUseCase $useCase)
     {
         parent::__construct();
     }
@@ -28,7 +28,7 @@ final class LoginAuthController extends CustomController
      */
     public function __invoke(Request $request): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             $this->ok(),
             false,
             $this->useCase->__invoke($request->all())->entity()

@@ -19,9 +19,7 @@ final class RoleMiddleware
     /**
      * @param LoginRoleAuthenticationUseCase $loginRoleAuthenticationUseCase
      */
-    public function __construct(
-        private LoginRoleAuthenticationUseCase $loginRoleAuthenticationUseCase
-    )
+    public function __construct(private readonly LoginRoleAuthenticationUseCase $loginRoleAuthenticationUseCase)
     {
     }
 

@@ -27,7 +27,7 @@ final class Forgot extends Domain
     {
         if (!is_null($exception)) {
             match ($exception) {
-                self::MAIL_FAILED => throw new MailFailedException("No se puedo envíar el correo", $this->internalServerError()),
+                self::MAIL_FAILED => throw new MailFailedException("Failed send mail", $this->internalServerError()),
                 self::USER_NOT_FOUND => throw new UserNotFoundException("User not found", $this->notFound()),
                 self::UPDATE_PASSWORD_USER_FAILED => throw new UserUpdateException("Failed update user", $this->internalServerError())
             };

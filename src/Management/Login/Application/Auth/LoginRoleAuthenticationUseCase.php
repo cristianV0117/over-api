@@ -16,7 +16,7 @@ final class LoginRoleAuthenticationUseCase
      * @param LoginAuthenticationContract $loginAuthenticationContract
      */
     public function __construct(
-        private LoginAuthenticationContract $loginAuthenticationContract
+        private readonly LoginAuthenticationContract $loginAuthenticationContract
     )
     {
     }

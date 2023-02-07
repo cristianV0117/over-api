@@ -17,8 +17,8 @@ final class UserStoreUseCase
      * @param UserCreatedUseCase $userCreatedUseCase
      */
     public function __construct(
-        private UserRepositoryContract $repository,
-        private UserCreatedUseCase $userCreatedUseCase
+        private readonly UserRepositoryContract $repository,
+        private readonly UserCreatedUseCase $userCreatedUseCase
     )
     {
     }

@@ -13,7 +13,7 @@ final class LoginCheckAuthenticationUseCase
     /**
      * @param LoginAuthenticationContract $authentication
      */
-    public function __construct(private LoginAuthenticationContract $authentication)
+    public function __construct(private readonly LoginAuthenticationContract $authentication)
     {
     }
 
