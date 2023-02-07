@@ -208,7 +208,10 @@ return [
         \Src\Management\Forgot\Infrastructure\Services\RouteServiceProvider::class,
         \Src\Management\Forgot\Infrastructure\Services\DependencyServiceProvider::class,
         // MANAGEMENT - LOGGER //
-        \Src\Management\Logger\Infrastructure\Services\DependencyServiceProvider::class
+        \Src\Management\Logger\Infrastructure\Services\DependencyServiceProvider::class,
+        // APPLICATION - ROLE //
+        \Src\Application\Role\Infrastructure\Services\RouteServiceProvider::class,
+        \Src\Application\Role\Infrastructure\Services\DependencyServiceProvider::class
     ],
 
     /*
