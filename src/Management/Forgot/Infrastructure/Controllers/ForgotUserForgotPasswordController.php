@@ -9,13 +9,17 @@ use Illuminate\Http\Request;
 use Src\Management\Forgot\Application\Mail\ForgotUserForgotPasswordUseCase;
 use Src\Management\Forgot\Domain\Exceptions\MailFailedException;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Exception;
 
 final class ForgotUserForgotPasswordController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param ForgotUserForgotPasswordUseCase $useCase
      */
-    public function __construct(private ForgotUserForgotPasswordUseCase $useCase)
+    public function __construct(private readonly ForgotUserForgotPasswordUseCase $useCase)
     {
         parent::__construct();
     }
@@ -28,13 +32,12 @@ final class ForgotUserForgotPasswordController extends CustomController
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            return $this->defaultJsonResponse(
-                200,
+            return $this->json(
+                $this->ok(),
                 false,
-                $this->useCase->__invoke($request->all())->entity(),
-                ["current" => '']
+                $this->useCase->__invoke($request->all())->entity()
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new MailFailedException($e->getMessage(), 500);
         }
     }

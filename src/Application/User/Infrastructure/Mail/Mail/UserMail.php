@@ -4,15 +4,17 @@ namespace Src\Application\User\Infrastructure\Mail\Mail;
 
 use Illuminate\Support\Facades\Mail;
 use Src\Application\User\Domain\Contracts\UserMailContract;
+use Src\Application\User\Domain\Events\UserCreatedEvent;
 
 final class UserMail implements UserMailContract
 {
-
-    public function mail($mail)
+    /**
+     * @param UserCreatedEvent $mailable
+     * @return void
+     */
+    public function userCreatedNotify(UserCreatedEvent $mailable): void
     {
-        $response = Mail::to($mail->to)
-            ->send(new CustomMail($mail));
-
-        dd($response);
+        Mail::to($mailable->mailNotification()->to)
+            ->send(new CustomMail($mailable->mailNotification()));
     }
 }

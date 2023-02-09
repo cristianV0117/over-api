@@ -27,6 +27,10 @@ final class ApiMiddleware
             throw new ApiAuthException("Not auth authorization is empty", $this->badRequest());
         }
 
+        if (null === env("API_KEY")) {
+            throw new ApiAuthException("Error with environment", $this->internalServerError());
+        }
+
         if (env("API_KEY") !== $request->header('authorization')) {
             throw new ApiAuthException("Not auth authorization is failed", $this->unauthorized());
         }

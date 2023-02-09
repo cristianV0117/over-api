@@ -14,7 +14,7 @@ final class UserDestroyController extends CustomController
     /**
      * @param UserDestroyUseCase $useCase
      */
-    public function __construct(private UserDestroyUseCase $useCase)
+    public function __construct(private readonly UserDestroyUseCase $useCase)
     {
         parent::__construct();
     }
@@ -22,15 +22,13 @@ final class UserDestroyController extends CustomController
     /**
      * @param int $id
      * @return JsonResponse
-     * @throws UserDestroyFailedException
      */
     public function __invoke(int $id): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             200,
             false,
-            $this->useCase->__invoke($id)->entity(),
-            ['current' => '']
+            $this->useCase->__invoke($id)->entity()
         );
     }
 }

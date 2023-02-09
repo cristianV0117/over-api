@@ -14,7 +14,7 @@ final class UserStoreController extends CustomController
     /**
      * @param UserStoreUseCase $useCase
      */
-    public function __construct(private UserStoreUseCase $useCase)
+    public function __construct(private readonly UserStoreUseCase $useCase)
     {
         parent::__construct();
     }
@@ -25,11 +25,10 @@ final class UserStoreController extends CustomController
      */
     public function __invoke(UserStoreRequest $request): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             201,
             false,
-            $this->useCase->__invoke($request->all())->entity(),
-            ['current' => '']
+            $this->useCase->__invoke($request->all())->entity()
         );
     }
 }

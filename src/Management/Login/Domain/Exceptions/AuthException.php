@@ -6,5 +6,4 @@ use Src\Shared\Domain\Exceptions\CustomException;
 
 final class AuthException extends CustomException
 {
-
 }

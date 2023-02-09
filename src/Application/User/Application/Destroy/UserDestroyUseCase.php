@@ -14,34 +14,16 @@ final class UserDestroyUseCase
     /**
      * @param UserRepositoryContract $repository
      */
-    public function __construct(private UserRepositoryContract $repository)
+    public function __construct(private readonly UserRepositoryContract $repository)
     {
     }
 
     /**
      * @param int $id
      * @return User
-     * @throws UserDestroyFailedException
      */
     public function __invoke(int $id): User
     {
-        $destroy = $this->repository->destroy(new UserId($id));
-        $this->statusDestroy($destroy);
-        return $destroy;
-    }
-
-    /**
-     * @param User $destroy
-     * @return void
-     * @throws UserDestroyFailedException
-     */
-    private function statusDestroy(User $destroy): void
-    {
-        if (is_null($destroy->entity())) {
-            throw new UserDestroyFailedException(
-                $destroy->exceptionMessage() ?? "An error has occurred",
-                $destroy->exceptionCode() ?? 500
-            );
-        }
+        return $this->repository->destroy(new UserId($id));
     }
 }

@@ -40,7 +40,7 @@ final class ForgotMailable extends StringValueObject
 
     public function setWebDomain(): void
     {
-        $this->mailObject->resetPassword = $this->webDomain() . '/reset-password/' . base64_encode($this->value());
+        $this->mailObject->resetPassword = $this->webDomain() . '/auth/reset-password/' . base64_encode($this->value());
     }
 
     public function setFrom(): void

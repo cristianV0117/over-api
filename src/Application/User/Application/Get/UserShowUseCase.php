@@ -14,29 +14,16 @@ final class UserShowUseCase
     /**
      * @param UserRepositoryContract $repository
      */
-    public function __construct(private UserRepositoryContract $repository)
+    public function __construct(private readonly UserRepositoryContract $repository)
     {
     }
 
     /**
      * @param int $id
      * @return User
-     * @throws UserNotFoundException
      */
     public function __invoke(int $id): User
     {
-        $user = $this->repository->show(new UserId($id));
-        $this->isset($user);
-        return $user;
-    }
-
-    /**
-     * @throws UserNotFoundException
-     */
-    private function isset(User $user): void
-    {
-        if (is_null($user->entity())) {
-            throw new UserNotFoundException("User not found", 404);
-        }
+        return $this->repository->show(new UserId($id));
     }
 }

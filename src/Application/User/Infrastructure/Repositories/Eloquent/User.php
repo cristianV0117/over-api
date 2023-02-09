@@ -37,7 +37,8 @@ final class User extends Model
      * @var string[]
      */
     protected $hidden = [
-        'password'
+        'password',
+        'pivot'
     ];
 
     /**

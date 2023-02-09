@@ -13,31 +13,16 @@ final class LoginCheckAuthenticationUseCase
     /**
      * @param LoginAuthenticationContract $authentication
      */
-    public function __construct(private LoginAuthenticationContract $authentication)
+    public function __construct(private readonly LoginAuthenticationContract $authentication)
     {
     }
 
     /**
      * @param string $jwt
      * @return bool
-     * @throws AuthException
      */
     public function __invoke(string $jwt): bool
     {
-        $auth = $this->authentication->check(new LoginJwt($jwt));
-        $this->authStatus($auth);
-        return $auth;
+        return $this->authentication->check(new LoginJwt($jwt));
     }
-
-    /**
-     * @param bool $auth
-     * @throws AuthException
-     */
-    private function authStatus(bool $auth): void
-    {
-        if (!$auth) {
-            throw new AuthException("invalid token or invalid user", 401);
-        }
-    }
-
 }

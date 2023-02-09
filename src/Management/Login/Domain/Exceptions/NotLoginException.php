@@ -8,5 +8,4 @@ use Src\Shared\Domain\Exceptions\CustomException;
 
 final class NotLoginException extends CustomException
 {
-
 }

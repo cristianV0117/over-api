@@ -33,7 +33,7 @@ final class CustomMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): CustomMail
     {
         return $this->from($this->demo->from)
             ->subject($this->demo->subject)

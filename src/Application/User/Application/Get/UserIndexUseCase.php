@@ -12,7 +12,7 @@ class UserIndexUseCase
     /**
      * @param UserRepositoryContract $repository
      */
-    public function __construct(private UserRepositoryContract $repository)
+    public function __construct(private readonly UserRepositoryContract $repository)
     {
     }
 

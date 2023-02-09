@@ -16,7 +16,7 @@ final class UserCriteriaController extends CustomController
      * @param UserCriteriaUseCase $useCase
      */
     public function __construct(
-        private UserCriteriaUseCase $useCase
+        private readonly UserCriteriaUseCase $useCase
     )
     {
         parent::__construct();
@@ -28,13 +28,12 @@ final class UserCriteriaController extends CustomController
      */
     public function __invoke(Request $request): JsonResponse
     {
-        return $this->defaultJsonResponse(
+        return $this->json(
             200,
             false,
             $this->useCase->__invoke(
                 (new HandlerCriteria($request->toArray()))->criteria()
-            )->entity(),
-            ['current' => '']
+            )->entity()
         );
     }
 }

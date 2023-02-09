@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 use Src\Management\Login\Application\Auth\LoginCheckAuthenticationUseCase;
 use Src\Management\Login\Domain\Exceptions\AuthException;
 use Closure;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 
 final class AuthMiddleware
 {
+    use HttpCodesHelper;
+
     /**
      * @param LoginCheckAuthenticationUseCase $authenticationUseCase
      */
-    public function __construct(private LoginCheckAuthenticationUseCase $authenticationUseCase)
+    public function __construct(private readonly LoginCheckAuthenticationUseCase $authenticationUseCase)
     {
     }
 
@@ -27,10 +30,14 @@ final class AuthMiddleware
     public function handle(Request $request, Closure $next): mixed
     {
         if (empty($request->header('authentication'))) {
-            throw new AuthException("Not jwt auth", 400);
+            throw new AuthException("Not jwt auth", $this->badRequest());
         }
 
-        $this->authenticationUseCase->__invoke($request->header('authentication'));
+        $auth = $this->authenticationUseCase->__invoke($request->header('authentication'));
+
+        if (!$auth) {
+            throw new AuthException("invalid token or invalid user or expired token", 401);
+        }
 
         return $next($request);
     }

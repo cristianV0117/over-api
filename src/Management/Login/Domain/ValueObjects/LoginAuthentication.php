@@ -13,20 +13,6 @@ final class LoginAuthentication extends CriteriaValueObject
     use AuthHelper, EnvHelper;
 
     /**
-     * @var array|object
-     */
-    private array|object $handler;
-
-    /**
-     * @param object|array $value
-     */
-    public function __construct(object|array $value)
-    {
-        parent::__construct($value);
-        $this->handler = $value;
-    }
-
-    /**
      * @return array
      */
     public function handler(): array
@@ -35,7 +21,7 @@ final class LoginAuthentication extends CriteriaValueObject
             'iat' => time(),
             'exp' => $this->time(),
             'aud' => $this->aud(),
-            'data' => $this->handler
+            'data' => $this->value()
         ];
     }
 

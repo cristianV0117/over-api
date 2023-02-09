@@ -8,4 +8,8 @@ use Src\Shared\Domain\Domain;
 
 final class {class} extends Domain
 {
+    protected function isException(?string $exception): void
+    {
+            // TODO: Implement isException() method.
+    }
 }

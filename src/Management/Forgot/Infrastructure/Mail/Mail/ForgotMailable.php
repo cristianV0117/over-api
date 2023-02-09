@@ -21,12 +21,12 @@ final class ForgotMailable implements ForgotMailableContract
             ->send(new CustomMail($mailable->object()));
 
         if (!$response) {
-            return new Forgot(null);
+            return new Forgot(null, 'MAIL_FAILED');
         }
 
         return new Forgot([
             "email" => $mailable->value(),
-            "custom" => "mensaje enviado"
+            "custom" => "Mail send"
         ]);
     }
 }

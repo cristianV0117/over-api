@@ -14,19 +14,19 @@ trait ResponseHelper
      * @param array|null $dependencies
      * @return array
      */
-    public function json(
+    public function responseForJson(
         int $status,
         bool $error,
         array|string|int|bool $response,
         string $domain,
-        ?array $dependencies
+        ?array $dependencies = null
     ): array
     {
         return [
             "status"      => $status,
             "error"       => $error,
             "message"     => $response,
-            "current_url" => $domain . $dependencies['current']
+            "current_url" => $domain . ($dependencies["current"] ?? '')
         ];
     }
 }

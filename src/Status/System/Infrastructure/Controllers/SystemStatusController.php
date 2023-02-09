@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Status\System\Infrastructure\Controllers;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Src\Shared\Infrastructure\Controllers\CustomController;
@@ -30,13 +31,13 @@ final class SystemStatusController extends CustomController
     {
         try {
             $this->connection();
-            return $this->defaultJsonResponse(
+            return $this->json(
                 200,
                 false,
                 "OK",
                 ['current' => '/status']
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new StatusNotResponseException("¡NOT OK!", 503);
         }
     }

@@ -9,7 +9,7 @@ abstract class StringValueObject
     /**
      * @param string $value
      */
-    public function __construct(private string $value)
+    public function __construct(private readonly string $value)
     {
     }
 

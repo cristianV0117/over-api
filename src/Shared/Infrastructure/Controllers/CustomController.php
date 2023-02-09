@@ -29,15 +29,15 @@ abstract class CustomController extends Controller
      * @param array|null $dependencies
      * @return JsonResponse
      */
-    public function defaultJsonResponse(
+    public function json(
         int $status,
         bool $error,
         array|string|int|bool $response,
-        ?array $dependencies
+        ?array $dependencies = null
     ): JsonResponse
     {
         return response()->json(
-            $this->json(
+            $this->responseForJson(
                 $status,
                 $error,
                 $response,

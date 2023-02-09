@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\User\Domain\Contracts\UserRepositoryContract;
+use Src\Application\User\Domain\Exceptions\UserNotFoundException;
 use Src\Application\User\Domain\User;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 use Src\Application\User\Domain\ValueObjects\{
@@ -22,7 +23,7 @@ final class UserRepository implements UserRepositoryContract
     /**
      * @param Model $model
      */
-    public function __construct(private Model $model)
+    public function __construct(private readonly Model $model)
     {
     }
 
@@ -41,7 +42,8 @@ final class UserRepository implements UserRepositoryContract
     public function show(UserId $id): User
     {
         $user = $this->model->find($id->value());
-        return new User((null !== $user) ? $user->toArray() : null);
+
+        return ($user) ? new User($user->toArray()) : new User(null, "USER_NOT_FOUND");
     }
 
     /**
@@ -52,11 +54,7 @@ final class UserRepository implements UserRepositoryContract
     {
         $store = $this->model->create($store->handler());
 
-        if (!$store) {
-            return new User(null);
-        }
-
-        return new User($store->toArray());
+        return ($store) ? new User($store->toArray()) : new User(null, 'USER_STORE_FAILED');
     }
 
     /**
@@ -69,14 +67,14 @@ final class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return $this->repositoryExceptions("User not found", $this->notFound());
+            return (new User(null, "USER_NOT_FOUND"));
         }
 
-        return new User(($record->update($update->value())) ? [
+        return ($record->update($update->handler())) ? new User([
             "id" => $record->id,
             "user_name" => $record->user_name,
             "email" => $record->email
-        ] : null);
+        ]) : new User(null, 'USER_UPDATED_FAILED');
     }
 
     /**
@@ -88,30 +86,12 @@ final class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return $this->repositoryExceptions("User not found", $this->notFound());
+            return new User(null, 'USER_NOT_FOUND');
         }
 
-        return new User(($record->delete()) ? [
+        return ($record->delete()) ? new User([
             "id" => $record->id
-        ]: null);
-    }
-
-    /**
-     * @param string $message
-     * @param int $status
-     * @return User
-     */
-    private function repositoryExceptions(
-        string $message,
-        int $status
-    ): User
-    {
-        $user = new User(null);
-        $user->setException([
-            "message" => $message,
-            "code" => $status
-        ]);
-        return $user;
+        ]) : new User(null, 'USER_DESTROY_FAILED');
     }
 
     /**

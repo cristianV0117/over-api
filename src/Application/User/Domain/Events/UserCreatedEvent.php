@@ -15,7 +15,7 @@ final class UserCreatedEvent
     /**
      * @param User $entity
      */
-    public function __construct(private User $entity)
+    public function __construct(private readonly User $entity)
     {
         $this->mail = new stdClass();
     }

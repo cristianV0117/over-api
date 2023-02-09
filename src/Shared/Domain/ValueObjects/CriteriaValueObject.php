@@ -9,7 +9,7 @@ abstract class CriteriaValueObject
     /**
      * @param mixed $value
      */
-    public function __construct(private mixed $value)
+    public function __construct(private readonly mixed $value)
     {
     }
 

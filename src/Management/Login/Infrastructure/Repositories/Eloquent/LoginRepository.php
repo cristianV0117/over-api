@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Src\Management\Login\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\User\Infrastructure\Repositories\Eloquent\User as Model;
-use Src\Management\Logger\Infrastructure\Observers\LoggerLoginObserver;
-use Src\Management\Logger\Infrastructure\Observers\LoggerLoginSubject;
 use Src\Management\Login\Domain\Contracts\LoginRepositoryContract;
 use Src\Management\Login\Domain\Login;
 use Src\Management\Login\Domain\ValueObjects\LoginCriteria;
@@ -14,25 +12,10 @@ use Src\Management\Login\Domain\ValueObjects\LoginCriteria;
 final class LoginRepository implements LoginRepositoryContract
 {
     /**
-     * @var Model
-     */
-    private Model $model;
-
-    /**
-     * @var LoggerLoginSubject
-     */
-    private LoggerLoginSubject $subject;
-
-    /**
      * @param Model $model
-     * @param LoggerLoginSubject $subject
-     * @param LoggerLoginObserver $observer
      */
-    public function __construct(Model $model, LoggerLoginSubject $subject, LoggerLoginObserver $observer)
+    public function __construct(private readonly Model $model)
     {
-        $this->model = $model;
-        $this->subject = $subject;
-        $this->subject->attach($observer);
     }
 
     /**
@@ -44,19 +27,14 @@ final class LoginRepository implements LoginRepositoryContract
         $user = $this->userByEmailAndUserName($login->value()['email'], $login->value()['user_name']);
 
         if (empty($user)) {
-            return new Login(null);
+            return new Login(null, 'USER_OR_PASSWORD_INCORRECT');
         }
 
         $check = $login->checkPassword($login->value()['password'], $user['password']);
 
         if (!$check) {
-            return new Login(null);
+            return new Login(null, 'USER_OR_PASSWORD_INCORRECT');
         }
-
-        $this->subject->notifyUserLogin([
-            "user_id" => $user["id"],
-            "type" => 1
-        ]);
 
         return new Login($user);
     }
@@ -71,7 +49,7 @@ final class LoginRepository implements LoginRepositoryContract
         string $userName
     ): ?array
     {
-        return $this->model
+        $user = $this->model
             ->with('roles')
             ->where('email', '=', $email)
             ->orWhere('user_name', '=', $userName)
@@ -81,8 +59,9 @@ final class LoginRepository implements LoginRepositoryContract
                 'email',
                 'password',
             )
-            ->first()
-            ->makeVisible('password')
+            ->first();
+
+        return $user?->makeVisible('password')
             ->toArray();
     }
 }
