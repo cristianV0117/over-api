@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace {namespace};
+namespace Src\Application\Task\Domain;
 
 use Src\Shared\Domain\Domain;
 
-final class {class} extends Domain
+final class Task extends Domain
 {
     protected function isException(?string $exception): void
     {
-            // TODO: Implement isException() method.
+        // TODO: Implement isException() method.
     }
 }

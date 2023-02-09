@@ -23,7 +23,7 @@ final class UserRepository implements UserRepositoryContract
     /**
      * @param Model $model
      */
-    public function __construct(private Model $model)
+    public function __construct(private readonly Model $model)
     {
     }
 
