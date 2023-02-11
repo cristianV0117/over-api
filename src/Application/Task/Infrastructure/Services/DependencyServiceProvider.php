@@ -18,6 +18,13 @@ final class DependencyServiceProvider extends ServiceProvider
                 ],
                 "contract" => \Src\Application\Task\Domain\Contracts\TaskRepositoryContract::class,
                 "repository" => \Src\Application\Task\Infrastructure\Repositories\Eloquent\TaskRepository::class
+            ],
+            [
+                "useCase" => [
+                    \Src\Application\Task\Application\Update\TaskCloseUseCase::class
+                ],
+                "contract" => \Src\Application\Task\Domain\Contracts\TaskRepositoryContract::class,
+                "repository" => \Src\Application\Task\Infrastructure\Repositories\Eloquent\TaskRepository::class
             ]
         ]);
         parent::__construct($app);
