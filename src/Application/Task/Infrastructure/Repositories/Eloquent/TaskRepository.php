@@ -5,15 +5,15 @@ namespace Src\Application\Task\Infrastructure\Repositories\Eloquent;
 use Src\Application\Task\Domain\Contracts\TaskRepositoryContract;
 use Src\Application\Task\Domain\Task;
 use Src\Application\Task\Domain\ValueObjects\TaskCriteria;
+use Src\Application\Task\Domain\ValueObjects\TaskId;
 use Src\Application\Task\Infrastructure\Repositories\Eloquent\Task as Model;
 use Src\Application\Task\Infrastructure\Repositories\Eloquent\CategoryTask;
+use Src\Shared\Infrastructure\Helper\DateHelper;
 
 final class TaskRepository implements TaskRepositoryContract
 {
-    /**
-     * @param \Src\Application\Task\Infrastructure\Repositories\Eloquent\Task $model
-     * @param \Src\Application\Task\Infrastructure\Repositories\Eloquent\CategoryTask $categoryTask
-     */
+    use DateHelper;
+
     public function __construct(
         private readonly Model $model,
         private readonly CategoryTask $categoryTask
@@ -34,6 +34,19 @@ final class TaskRepository implements TaskRepositoryContract
         $store = $this->model->create($handler);
 
         return new Task($store->toArray());
+    }
+
+    /**
+     * @param TaskId $taskId
+     * @return Task
+     */
+    public function close(TaskId $taskId): Task
+    {
+        $task = $this->model->find($taskId->value());
+        $task->closing_date = $this->now();
+        $task->status = 2;
+        $task->save();
+        return new Task($task->id);
     }
 
     /**
