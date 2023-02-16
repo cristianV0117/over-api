@@ -8,7 +8,6 @@ use Src\Management\Login\Domain\Exceptions\NotLoginException;
 use Src\Management\Login\Domain\Exceptions\NotRoleException;
 use Src\Shared\Domain\Domain;
 use Src\Shared\Domain\Helpers\HttpCodesHelper;
-use function Clue\StreamFilter\fun;
 
 final class Login extends Domain
 {
@@ -124,5 +123,14 @@ final class Login extends Domain
                 self::ROLE_NOT_HAVE_PERMISSIONS => throw new NotRoleException("your role does not have permissions", $this->unauthorized())
             };
         }
+    }
+
+    /**
+     * @param string|null $event
+     * @return void
+     */
+    protected function domainEvent(?string $event): void
+    {
+        //
     }
 }
