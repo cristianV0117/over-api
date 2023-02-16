@@ -48,7 +48,7 @@ final class TaskRepository implements TaskRepositoryContract
         $task->status = 2;
         $task->save();
 
-        return new Task($task->id);
+        return new Task($task->id, 'TASK_CLOSE');
     }
 
     /**

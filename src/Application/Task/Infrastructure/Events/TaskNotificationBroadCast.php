@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-final class TaskCreatedNotification implements ShouldBroadcast
+final class TaskNotificationBroadCast implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -43,6 +43,6 @@ final class TaskCreatedNotification implements ShouldBroadcast
      */
     public function broadcastAs(): string
     {
-        return 'TaskCreatedNotification';
+        return 'TaskNotificationBroadCast';
     }
 }

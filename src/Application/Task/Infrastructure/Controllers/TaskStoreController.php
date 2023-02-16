@@ -7,7 +7,6 @@ namespace Src\Application\Task\Infrastructure\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\Application\Task\Application\Store\TaskStoreUseCase;
-use Src\Application\Task\Infrastructure\Events\TaskCreatedNotification;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 
 final class TaskStoreController extends CustomController
@@ -26,12 +25,10 @@ final class TaskStoreController extends CustomController
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $task = $this->taskStoreUseCase->__invoke($request->toArray());
-        event(new TaskCreatedNotification($task->events()->event()));
         return $this->json(
             201,
             false,
-            $task->entity()
+            $this->taskStoreUseCase->__invoke($request->toArray())->entity()
         );
     }
 }
