@@ -43,7 +43,7 @@ final class UserRepository implements UserRepositoryContract
     {
         $user = $this->model->find($id->value());
 
-        return ($user) ? new User($user->toArray()) : new User(null, "USER_NOT_FOUND");
+        return ($user) ? new User($user->toArray()) : new User(null, null, "USER_NOT_FOUND");
     }
 
     /**
@@ -54,7 +54,7 @@ final class UserRepository implements UserRepositoryContract
     {
         $store = $this->model->create($store->handler());
 
-        return ($store) ? new User($store->toArray()) : new User(null, 'USER_STORE_FAILED');
+        return ($store) ? new User($store->toArray()) : new User(null, null, 'USER_STORE_FAILED');
     }
 
     /**
@@ -67,14 +67,14 @@ final class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return (new User(null, "USER_NOT_FOUND"));
+            return (new User(null, null, "USER_NOT_FOUND"));
         }
 
         return ($record->update($update->handler())) ? new User([
             "id" => $record->id,
             "user_name" => $record->user_name,
             "email" => $record->email
-        ]) : new User(null, 'USER_UPDATED_FAILED');
+        ]) : new User(null, null, 'USER_UPDATED_FAILED');
     }
 
     /**
@@ -86,12 +86,12 @@ final class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return new User(null, 'USER_NOT_FOUND');
+            return new User(null, null, 'USER_NOT_FOUND');
         }
 
         return ($record->delete()) ? new User([
             "id" => $record->id
-        ]) : new User(null, 'USER_DESTROY_FAILED');
+        ]) : new User(null, null, 'USER_DESTROY_FAILED');
     }
 
     /**

@@ -39,4 +39,9 @@ final class User extends Domain
             };
         }
     }
+
+    protected function domainEvent(?string $event): void
+    {
+        // TODO: Implement domainEvent() method.
+    }
 }

@@ -28,7 +28,10 @@ final class TaskStoreController extends CustomController
         return $this->json(
             201,
             false,
-            $this->taskStoreUseCase->__invoke($request->toArray())->entity()
+            $this->taskStoreUseCase->__invoke(
+                $request->toArray(),
+                $request->header('authentication')
+            )->entity()
         );
     }
 }

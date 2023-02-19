@@ -25,7 +25,8 @@ class DependencyServiceProvider extends ServiceProvider
                 "useCase" => [
                     \Src\Management\Login\Application\Auth\LoginAuthenticationUseCase::class,
                     \Src\Management\Login\Application\Auth\LoginCheckAuthenticationUseCase::class,
-                    \Src\Management\Login\Application\Auth\LoginRoleAuthenticationUseCase::class
+                    \Src\Management\Login\Application\Auth\LoginRoleAuthenticationUseCase::class,
+                    \Src\Management\Login\Application\Auth\LoginGetAuthenticationUseCase::class
                 ],
                 "contract" => \Src\Management\Login\Domain\Contracts\LoginAuthenticationContract::class,
                 "repository" => \Src\Management\Login\Infrastructure\Authentication\Jwt\LoginAuthentication::class

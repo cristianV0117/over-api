@@ -25,11 +25,17 @@ final class TaskCreated extends DomainEvent
     }
 
     /**
+     * @param mixed $eventElements
      * @return array
      */
-    public function event(): array
+    public function event(mixed $eventElements): array
     {
+        if ($eventElements->id !== $eventElements->user_task_id) {
+            return [];
+        }
+
         return [
+            'eventUserId' => $eventElements->id,
             'eventName' => $this->eventName(),
             'eventDescription' => $this->eventDescription()
         ];

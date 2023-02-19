@@ -3,9 +3,14 @@
 namespace Src\Application\Task\Infrastructure\Events;
 
 use Src\Shared\Domain\Events\EventBus;
+use Src\Shared\Infrastructure\Repositories\Eloquent\Notification;
 
 final class TaskNotification implements EventBus
 {
+    public function __construct(private Notification $notification)
+    {
+    }
+
     /**
      * @param mixed $eventElements
      * @return void
@@ -17,5 +22,12 @@ final class TaskNotification implements EventBus
                 $eventElements
             ));
         }
+    }
+
+    private function saveNotification(mixed $eventElements)
+    {
+        $this->notification->create([
+
+        ]);
     }
 }

@@ -23,9 +23,13 @@ final class Login extends Domain
      * @throws NotRoleException
      * @throws NotLoginException
      */
-    public function __construct(private readonly mixed $entity = null, private readonly ?string $exception = null)
+    public function __construct(
+        private readonly mixed $entity = null,
+        private readonly ?string $event = null,
+        private readonly ?string $exception = null
+    )
     {
-        parent::__construct($this->entity, $this->exception);
+        parent::__construct($this->entity, $this->event, $this->exception);
         $this->isUserCheckRole();
     }
 

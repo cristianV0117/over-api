@@ -30,8 +30,8 @@ final class Task extends Domain
     {
         if ($event) {
             $this->events =  match ($event) {
-                self::TASK_CREATED => new TaskCreated(null),
-                self::TASK_CLOSE => new TaskClose(null)
+                self::TASK_CREATED => new TaskCreated(),
+                self::TASK_CLOSE => new TaskClose()
             };
         }
     }
