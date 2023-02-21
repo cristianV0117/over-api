@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Role\Domain;
 
 use Src\Shared\Domain\Domain;

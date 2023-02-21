@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Management\Forgot\Domain\Contracts;
 
 use Src\Management\Forgot\Domain\Forgot;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Src\Management\Login\Infrastructure\Authentication\Jwt;
+namespace Src\Management\Login\Infrastructure\Repositories\Jwt;
 
 use Exception;
+use Firebase\JWT\JWT;
 use Src\Management\Login\Domain\Contracts\LoginAuthenticationContract;
 use Src\Management\Login\Domain\ValueObjects\LoginAuthentication as LoginAuthenticationCriteria;
-use Firebase\JWT\JWT;
 use Src\Management\Login\Domain\ValueObjects\LoginJwt;
 
 final class LoginAuthentication implements LoginAuthenticationContract

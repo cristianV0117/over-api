@@ -29,7 +29,7 @@ class DependencyServiceProvider extends ServiceProvider
                     \Src\Management\Login\Application\Auth\LoginGetAuthenticationUseCase::class
                 ],
                 "contract" => \Src\Management\Login\Domain\Contracts\LoginAuthenticationContract::class,
-                "repository" => \Src\Management\Login\Infrastructure\Authentication\Jwt\LoginAuthentication::class
+                "repository" => \Src\Management\Login\Infrastructure\Repositories\Jwt\LoginAuthentication::class
             ]
         ]);
         parent::__construct($app);

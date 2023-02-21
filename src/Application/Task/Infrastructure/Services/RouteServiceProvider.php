@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Task\Infrastructure\Services;
 
 use Src\Shared\Infrastructure\Services\RouteServiceProvider as ServiceProvider;

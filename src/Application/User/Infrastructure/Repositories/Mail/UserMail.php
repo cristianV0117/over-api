@@ -1,6 +1,8 @@
 <?php
 
-namespace Src\Application\User\Infrastructure\Mail\Mail;
+declare(strict_types=1);
+
+namespace Src\Application\User\Infrastructure\Repositories\Mail;
 
 use Illuminate\Support\Facades\Mail;
 use Src\Application\User\Domain\Contracts\UserMailContract;

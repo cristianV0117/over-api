@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Src\Management\Login\Infrastructure\Middleware;
+namespace Src\Shared\Infrastructure\Middleware;
 
+use Closure;
 use Illuminate\Http\Request;
 use Src\Management\Login\Application\Auth\LoginCheckAuthenticationUseCase;
-use Src\Management\Login\Domain\Exceptions\AuthException;
-use Closure;
+use Src\Shared\Domain\Exceptions\AuthException;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 
 final class AuthMiddleware

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Task\Domain\Contracts;
 
 use Src\Application\Task\Domain\Task;

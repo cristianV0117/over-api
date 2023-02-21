@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Src\Management\Forgot\Infrastructure\Mail\Mail;
+namespace Src\Application\User\Infrastructure\Repositories\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Src\Application\User\Infrastructure\Mail\Mail\Demo;
 
 final class CustomMail extends Mailable
 {
@@ -37,7 +38,6 @@ final class CustomMail extends Mailable
     {
         return $this->from($this->demo->from)
             ->subject($this->demo->subject)
-            ->with('webDomain', $this->demo->resetPassword)
             ->markdown($this->demo->markdown);
     }
 }
