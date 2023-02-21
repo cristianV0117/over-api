@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Src\Management\Login\Infrastructure\Middleware;
+namespace Src\Shared\Infrastructure\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Src\Management\Login\Application\Auth\LoginRoleAuthenticationUseCase;
-use Src\Management\Login\Domain\Exceptions\AuthException;
 use Src\Management\Login\Domain\Exceptions\NotLoginException;
-use Src\Management\Login\Domain\Exceptions\NotRoleException;
+use Src\Shared\Domain\Exceptions\AuthException;
+use Src\Shared\Domain\Exceptions\NotRoleException;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 
 final class RoleMiddleware

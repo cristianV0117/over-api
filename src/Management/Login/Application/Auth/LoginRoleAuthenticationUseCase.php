@@ -6,9 +6,9 @@ namespace Src\Management\Login\Application\Auth;
 
 use Src\Management\Login\Domain\Contracts\LoginAuthenticationContract;
 use Src\Management\Login\Domain\Exceptions\NotLoginException;
-use Src\Management\Login\Domain\Exceptions\NotRoleException;
 use Src\Management\Login\Domain\Login;
 use Src\Management\Login\Domain\ValueObjects\LoginJwt;
+use Src\Shared\Domain\Exceptions\NotRoleException;
 
 final class LoginRoleAuthenticationUseCase
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Src\Management\Forgot\Infrastructure\Mail\Mail;
+namespace Src\Management\Forgot\Infrastructure\Repositories\Mail;
 
+use Illuminate\Support\Facades\Mail;
 use Src\Management\Forgot\Domain\Contracts\ForgotMailableContract;
 use Src\Management\Forgot\Domain\Forgot;
 use Src\Management\Forgot\Domain\ValueObjects\ForgotMailable as ForgotMailableCriteria;
-use Illuminate\Support\Facades\Mail;
 
 final class ForgotMailable implements ForgotMailableContract
 {

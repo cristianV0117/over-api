@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Task\Domain\Events;
 
 use Src\Shared\Domain\Events\DomainEvent;

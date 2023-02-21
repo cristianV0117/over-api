@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Src\Management\Login\Domain;
 
 use Src\Management\Login\Domain\Exceptions\NotLoginException;
-use Src\Management\Login\Domain\Exceptions\NotRoleException;
 use Src\Shared\Domain\Domain;
+use Src\Shared\Domain\Exceptions\NotRoleException;
 use Src\Shared\Domain\Helpers\HttpCodesHelper;
 
 final class Login extends Domain

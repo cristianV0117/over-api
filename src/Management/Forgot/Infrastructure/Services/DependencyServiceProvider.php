@@ -19,7 +19,7 @@ final class DependencyServiceProvider extends ServiceProvider
                     \Src\Management\Forgot\Application\Mail\ForgotUserForgotPasswordUseCase::class
                 ],
                 "contract" => \Src\Management\Forgot\Domain\Contracts\ForgotMailableContract::class,
-                "repository" => \Src\Management\Forgot\Infrastructure\Mail\Mail\ForgotMailable::class
+                "repository" => \Src\Management\Forgot\Infrastructure\Repositories\Mail\ForgotMailable::class
             ],
             [
                 "useCase" => [

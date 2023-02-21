@@ -1,0 +1,351 @@
+Listado de rutas de carpetas para el volumen Acer
+El número de serie del volumen es 7A89-D4AD
+C:\WWW\OVER-API\SRC
++---Application
+¦   +---Home
+¦   ¦   +---Controllers
+¦   ¦           HomeController.php
+¦   ¦           
+¦   +---Role
+¦   ¦   +---Application
+¦   ¦   ¦   +---Get
+¦   ¦   ¦           RoleIndexUseCase.php
+¦   ¦   ¦           
+¦   ¦   +---Domain
+¦   ¦   ¦   ¦   Role.php
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---Contracts
+¦   ¦   ¦           RoleRepositoryContract.php
+¦   ¦   ¦           
+¦   ¦   +---Infrastructure
+¦   ¦       +---Controllers
+¦   ¦       ¦       RoleIndexController.php
+¦   ¦       ¦       
+¦   ¦       +---Repositories
+¦   ¦       ¦   +---Eloquent
+¦   ¦       ¦           Role.php
+¦   ¦       ¦           RoleRepository.php
+¦   ¦       ¦           
+¦   ¦       +---Routes
+¦   ¦       ¦       Api.php
+¦   ¦       ¦       
+¦   ¦       +---Services
+¦   ¦               DependencyServiceProvider.php
+¦   ¦               RouteServiceProvider.php
+¦   ¦               
+¦   +---Task
+¦   ¦   +---Application
+¦   ¦   ¦   +---Destroy
+¦   ¦   ¦   +---Get
+¦   ¦   ¦   +---Store
+¦   ¦   ¦   ¦       TaskStoreUseCase.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Update
+¦   ¦   ¦           TaskCloseUseCase.php
+¦   ¦   ¦           
+¦   ¦   +---Domain
+¦   ¦   ¦   ¦   Task.php
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---Contracts
+¦   ¦   ¦   ¦       TaskRepositoryContract.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Events
+¦   ¦   ¦   ¦       TaskClose.php
+¦   ¦   ¦   ¦       TaskCreated.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Exceptions
+¦   ¦   ¦   +---ValueObjects
+¦   ¦   ¦           TaskCriteria.php
+¦   ¦   ¦           TaskId.php
+¦   ¦   ¦           
+¦   ¦   +---Infrastructure
+¦   ¦       +---Controllers
+¦   ¦       ¦       TaskCloseController.php
+¦   ¦       ¦       TaskStoreController.php
+¦   ¦       ¦       
+¦   ¦       +---Events
+¦   ¦       ¦       TaskNotification.php
+¦   ¦       ¦       TaskNotificationBroadCast.php
+¦   ¦       ¦       
+¦   ¦       +---Repositories
+¦   ¦       ¦   +---Eloquent
+¦   ¦       ¦           CategoryTask.php
+¦   ¦       ¦           Task.php
+¦   ¦       ¦           TaskRepository.php
+¦   ¦       ¦           
+¦   ¦       +---Request
+¦   ¦       +---Routes
+¦   ¦       ¦       Api.php
+¦   ¦       ¦       
+¦   ¦       +---Services
+¦   ¦               DependencyServiceProvider.php
+¦   ¦               RouteServiceProvider.php
+¦   ¦               
+¦   +---User
+¦       +---Application
+¦       ¦   +---Destroy
+¦       ¦   ¦       UserDestroyUseCase.php
+¦       ¦   ¦       
+¦       ¦   +---Get
+¦       ¦   ¦       UserCriteriaUseCase.php
+¦       ¦   ¦       UserIndexUseCase.php
+¦       ¦   ¦       UserShowUseCase.php
+¦       ¦   ¦       
+¦       ¦   +---Mail
+¦       ¦   ¦       UserCreatedUseCase.php
+¦       ¦   ¦       
+¦       ¦   +---Store
+¦       ¦   ¦       UserStoreUseCase.php
+¦       ¦   ¦       
+¦       ¦   +---Update
+¦       ¦           UserUpdateUseCase.php
+¦       ¦           
+¦       +---Domain
+¦       ¦   ¦   User.php
+¦       ¦   ¦   
+¦       ¦   +---Contracts
+¦       ¦   ¦       UserMailContract.php
+¦       ¦   ¦       UserRepositoryContract.php
+¦       ¦   ¦       
+¦       ¦   +---Events
+¦       ¦   ¦       UserCreatedEvent.php
+¦       ¦   ¦       
+¦       ¦   +---Exceptions
+¦       ¦   ¦       UserDestroyFailedException.php
+¦       ¦   ¦       UserNotFoundException.php
+¦       ¦   ¦       UserRequestFailedException.php
+¦       ¦   ¦       UserStoreFailedException.php
+¦       ¦   ¦       UserUpdateException.php
+¦       ¦   ¦       
+¦       ¦   +---ValueObjects
+¦       ¦           UserCriteria.php
+¦       ¦           UserId.php
+¦       ¦           UserStore.php
+¦       ¦           UserUpdate.php
+¦       ¦           
+¦       +---Infrastructure
+¦           +---Controllers
+¦           ¦       UserCriteriaController.php
+¦           ¦       UserDestroyController.php
+¦           ¦       UserIndexController.php
+¦           ¦       UserShowController.php
+¦           ¦       UserStoreController.php
+¦           ¦       UserUpdateController.php
+¦           ¦       
+¦           +---Repositories
+¦           ¦   +---Eloquent
+¦           ¦   ¦       User.php
+¦           ¦   ¦       UserRepository.php
+¦           ¦   ¦       
+¦           ¦   +---Mail
+¦           ¦           CustomMail.php
+¦           ¦           UserMail.php
+¦           ¦           
+¦           +---Request
+¦           ¦       UserStoreRequest.php
+¦           ¦       UserUpdateRequest.php
+¦           ¦       
+¦           +---Routes
+¦           ¦       Api.php
+¦           ¦       
+¦           +---Services
+¦                   DependencyServiceProvider.php
+¦                   RouteServiceProvider.php
+¦                   
++---Management
+¦   +---Forgot
+¦   ¦   +---Application
+¦   ¦   ¦   +---Mail
+¦   ¦   ¦   ¦       ForgotUserForgotPasswordUseCase.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Update
+¦   ¦   ¦           ForgotUserResetPasswordUseCase.php
+¦   ¦   ¦           
+¦   ¦   +---Domain
+¦   ¦   ¦   ¦   Forgot.php
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---Contracts
+¦   ¦   ¦   ¦       ForgotMailableContract.php
+¦   ¦   ¦   ¦       ForgotRepositoryContract.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Exceptions
+¦   ¦   ¦   ¦       MailFailedException.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---ValueObjects
+¦   ¦   ¦           ForgotMailable.php
+¦   ¦   ¦           ForgotReset.php
+¦   ¦   ¦           
+¦   ¦   +---Infrastructure
+¦   ¦       +---Controllers
+¦   ¦       ¦       ForgotUserForgotPasswordController.php
+¦   ¦       ¦       ForgotUserResetPasswordController.php
+¦   ¦       ¦       
+¦   ¦       +---Repositories
+¦   ¦       ¦   +---Eloquent
+¦   ¦       ¦   ¦       ForgotRepository.php
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---Mail
+¦   ¦       ¦           CustomMail.php
+¦   ¦       ¦           ForgotMailable.php
+¦   ¦       ¦           
+¦   ¦       +---Routes
+¦   ¦       ¦       Api.php
+¦   ¦       ¦       
+¦   ¦       +---Services
+¦   ¦               DependencyServiceProvider.php
+¦   ¦               RouteServiceProvider.php
+¦   ¦               
+¦   +---Logger
+¦   ¦   +---Application
+¦   ¦   ¦   +---Logger
+¦   ¦   ¦           LoggerLoginUseCase.php
+¦   ¦   ¦           
+¦   ¦   +---Domain
+¦   ¦   ¦   ¦   Logger.php
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---Contracts
+¦   ¦   ¦   ¦       LoggerRepositoryContract.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Exceptions
+¦   ¦   ¦   ¦       LoggerLoginFailedException.php
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---ValueObjects
+¦   ¦   ¦           LoggerLogin.php
+¦   ¦   ¦           
+¦   ¦   +---Infrastructure
+¦   ¦       +---Observers
+¦   ¦       ¦       LoggerLoginObserver.php
+¦   ¦       ¦       LoggerLoginSubject.php
+¦   ¦       ¦       
+¦   ¦       +---Repositories
+¦   ¦       ¦   +---Eloquent
+¦   ¦       ¦           LoggerRepository.php
+¦   ¦       ¦           LoginLogger.php
+¦   ¦       ¦           
+¦   ¦       +---Services
+¦   ¦               DependencyServiceProvider.php
+¦   ¦               
+¦   +---Login
+¦       +---Application
+¦       ¦   +---Auth
+¦       ¦   ¦       LoginAuthenticationUseCase.php
+¦       ¦   ¦       LoginCheckAuthenticationUseCase.php
+¦       ¦   ¦       LoginGetAuthenticationUseCase.php
+¦       ¦   ¦       LoginRoleAuthenticationUseCase.php
+¦       ¦   ¦       
+¦       ¦   +---Login
+¦       ¦           LoginAuthUseCase.php
+¦       ¦           
+¦       +---Domain
+¦       ¦   ¦   Login.php
+¦       ¦   ¦   
+¦       ¦   +---Contracts
+¦       ¦   ¦       LoginAuthenticationContract.php
+¦       ¦   ¦       LoginRepositoryContract.php
+¦       ¦   ¦       
+¦       ¦   +---Exceptions
+¦       ¦   ¦       NotLoginException.php
+¦       ¦   ¦       
+¦       ¦   +---ValueObjects
+¦       ¦           LoginAuthentication.php
+¦       ¦           LoginCriteria.php
+¦       ¦           LoginJwt.php
+¦       ¦           
+¦       +---Infrastructure
+¦           +---Controllers
+¦           ¦       LoginAuthController.php
+¦           ¦       
+¦           +---Repositories
+¦           ¦   +---Eloquent
+¦           ¦   ¦       LoginRepository.php
+¦           ¦   ¦       
+¦           ¦   +---Jwt
+¦           ¦           LoginAuthentication.php
+¦           ¦           
+¦           +---Routes
+¦           ¦       Api.php
+¦           ¦       
+¦           +---Services
+¦                   DependencyServiceProvider.php
+¦                   RouteServiceProvider.php
+¦                   
++---Shared
+¦   +---Domain
+¦   ¦   ¦   Domain.php
+¦   ¦   ¦   
+¦   ¦   +---Events
+¦   ¦   ¦       DomainEvent.php
+¦   ¦   ¦       EventBus.php
+¦   ¦   ¦       
+¦   ¦   +---Exceptions
+¦   ¦   ¦       AuthException.php
+¦   ¦   ¦       CustomException.php
+¦   ¦   ¦       NotRoleException.php
+¦   ¦   ¦       
+¦   ¦   +---Helpers
+¦   ¦   ¦       AuthHelper.php
+¦   ¦   ¦       ClientHelper.php
+¦   ¦   ¦       EnvHelper.php
+¦   ¦   ¦       HttpCodesHelper.php
+¦   ¦   ¦       JwtHelper.php
+¦   ¦   ¦       
+¦   ¦   +---ValueObjects
+¦   ¦           CriteriaValueObject.php
+¦   ¦           IntValueObject.php
+¦   ¦           StringValueObject.php
+¦   ¦           
+¦   +---Infrastructure
+¦       +---Controllers
+¦       ¦       CustomController.php
+¦       ¦       
+¦       +---Criteria
+¦       ¦       CompareCriteria.php
+¦       ¦       CompareOrCriteria.php
+¦       ¦       HandlerCriteria.php
+¦       ¦       LimitCriteria.php
+¦       ¦       
+¦       +---Exceptions
+¦       ¦       ApiAuthException.php
+¦       ¦       HandlerException.php
+¦       ¦       
+¦       +---Helper
+¦       ¦       DateHelper.php
+¦       ¦       HateoasHelper.php
+¦       ¦       HttpCodesHelper.php
+¦       ¦       RequestHelper.php
+¦       ¦       ResponseHelper.php
+¦       ¦       RolesHelper.php
+¦       ¦       
+¦       +---Middleware
+¦       ¦       ApiMiddleware.php
+¦       ¦       AuthMiddleware.php
+¦       ¦       RoleMiddleware.php
+¦       ¦       
+¦       +---Observers
+¦       ¦       Observable.php
+¦       ¦       Observer.php
+¦       ¦       
+¦       +---Repositories
+¦       ¦   +---Eloquent
+¦       ¦           Notification.php
+¦       ¦           
+¦       +---Services
+¦               DependencyServiceProvider.php
+¦               RouteServiceProvider.php
+¦               
++---Status
+    +---System
+        +---Domain
+        ¦   +---Exceptions
+        ¦           StatusNotResponseException.php
+        ¦           
+        +---Infrastructure
+            +---Controllers
+            ¦       SystemStatusController.php
+            ¦       
+            +---Routes
+            ¦       Api.php
+            ¦       
+            +---Services
+                    RouteServiceProvider.php
+                    

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Role\Application\Get;
 
 use Src\Application\Role\Domain\Contracts\RoleRepositoryContract;

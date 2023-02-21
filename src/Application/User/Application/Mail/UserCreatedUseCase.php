@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\User\Application\Mail;
 
 use Src\Application\User\Domain\Contracts\UserMailContract;

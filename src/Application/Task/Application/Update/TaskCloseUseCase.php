@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Task\Application\Update;
 
 use Src\Application\Task\Domain\Contracts\TaskRepositoryContract;
