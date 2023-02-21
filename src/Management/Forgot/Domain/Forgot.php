@@ -33,4 +33,9 @@ final class Forgot extends Domain
             };
         }
     }
+
+    protected function domainEvent(?string $event): void
+    {
+        // TODO: Implement domainEvent() method.
+    }
 }

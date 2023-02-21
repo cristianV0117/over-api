@@ -10,4 +10,9 @@ final class Role extends Domain
     {
         // TODO: Implement isException() method.
     }
+
+    protected function domainEvent(?string $event): void
+    {
+        // TODO: Implement domainEvent() method.
+    }
 }

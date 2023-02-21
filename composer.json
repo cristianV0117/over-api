@@ -12,6 +12,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "pusher/pusher-php-server": "^5.0.3",
         "sentry/sentry-laravel": "^2.13"
     },
     "require-dev": {

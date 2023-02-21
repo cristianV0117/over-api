@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Application\Task\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\Task\Domain\Contracts\TaskRepositoryContract;
@@ -28,12 +30,11 @@ final class TaskRepository implements TaskRepositoryContract
     public function store(TaskCriteria $taskCriteria): Task
     {
         $handler = $taskCriteria->handler();
-        $idCategoryTask = $this->ifCategoryTaskExist($taskCriteria->value()["category_task"]);
-        $handler["categorie_task_id"] = $idCategoryTask ?? 0;
+        $handler["categorie_task_id"] = $this->ifCategoryTaskExist($taskCriteria->value()["category_task"]) ?? 0;
 
         $store = $this->model->create($handler);
 
-        return new Task($store->toArray());
+        return new Task($store->toArray(), 'TASK_CREATED');
     }
 
     /**
@@ -46,7 +47,8 @@ final class TaskRepository implements TaskRepositoryContract
         $task->closing_date = $this->now();
         $task->status = 2;
         $task->save();
-        return new Task($task->id);
+
+        return new Task($task->id, 'TASK_CLOSE');
     }
 
     /**
