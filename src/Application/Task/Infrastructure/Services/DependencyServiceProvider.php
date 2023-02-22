@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Application\Task\Infrastructure\Services;
 
+use Src\Application\Task\Application\Get\TaskIndexUseCase;
 use Src\Shared\Infrastructure\Services\DependencyServiceProvider as ServiceProvider;
 
 final class DependencyServiceProvider extends ServiceProvider
@@ -29,6 +30,13 @@ final class DependencyServiceProvider extends ServiceProvider
                 ],
                 "contract" => \Src\Shared\Domain\Events\EventBus::class,
                 "repository" => \Src\Application\Task\Infrastructure\Events\TaskNotification::class
+            ],
+            [
+                "useCase" => [
+                    \Src\Application\Task\Application\Get\TaskIndexUseCase::class,
+                ],
+                "contract" => \Src\Application\Task\Domain\Contracts\TaskRepositoryContract::class,
+                "repository" => \Src\Application\Task\Infrastructure\Repositories\Doctrine\TaskRepository::class
             ]
         ]);
         parent::__construct($app);

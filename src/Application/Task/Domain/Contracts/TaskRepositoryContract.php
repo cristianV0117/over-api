@@ -11,6 +11,11 @@ use Src\Application\Task\Domain\ValueObjects\TaskId;
 interface TaskRepositoryContract
 {
     /**
+     * @return Task
+     */
+    public function index(): Task;
+
+    /**
      * @param TaskCriteria $taskCriteria
      * @return Task
      */
