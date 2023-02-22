@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManager;
 final class TaskRepository implements TaskRepositoryContract
 {
     public function __construct(
-        private Entity $entity,
+        private readonly Entity $entity,
         private readonly EntityManager $entityManager
     )
     {

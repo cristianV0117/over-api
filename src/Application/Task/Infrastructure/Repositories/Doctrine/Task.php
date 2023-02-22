@@ -6,6 +6,9 @@ namespace Src\Application\Task\Infrastructure\Repositories\Doctrine;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Src\Application\User\Infrastructure\Repositories\Doctrine\User;
 
 /**
  * @ORM\Entity
@@ -69,4 +72,16 @@ final class Task
      * @ORM\Column(type="string")
      */
     private readonly string $created_at;
+
+    #[ManyToOne(targetEntity: User::class)]
+    #[JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    private ?User $user = null;
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 }
