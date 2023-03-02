@@ -8,16 +8,15 @@ use Baethon\LaravelCriteria\CriteriaInterface;
 
 final class CompareCriteria implements CriteriaInterface
 {
-
     /**
      * @param string $field
      * @param string $operator
-     * @param string $value
+     * @param bool|int|string $value
      */
     public function __construct(
-        private string $field,
-        private string $operator,
-        private string $value
+        private readonly string $field,
+        private readonly string $operator,
+        private readonly bool|int|string $value
     )
     {
     }

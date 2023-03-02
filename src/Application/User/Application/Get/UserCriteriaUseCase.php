@@ -23,6 +23,6 @@ final class UserCriteriaUseCase
      */
     public function __invoke(mixed $criteria): User
     {
-        return $this->repository->findByCriteria(new UserCriteria($criteria));
+        return $this->repository->match(new UserCriteria($criteria));
     }
 }

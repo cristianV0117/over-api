@@ -24,6 +24,16 @@ final class TaskRepository implements TaskRepositoryContract
     }
 
     /**
+     * @return Task
+     */
+    public function index(): Task
+    {
+        return new Task($this->model->with(['user' => function ($query) {
+            $query->select('id', 'user_name', 'email');
+        }])->get()->toArray());
+    }
+
+    /**
      * @param TaskCriteria $taskCriteria
      * @return Task
      */

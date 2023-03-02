@@ -46,5 +46,5 @@ interface UserRepositoryContract
      * @param UserCriteria $criteria
      * @return User
      */
-    public function findByCriteria(UserCriteria $criteria): User;
+    public function match(UserCriteria $criteria): User;
 }

@@ -4,18 +4,27 @@ declare(strict_types=1);
 
 namespace Src\Shared\Infrastructure\Criteria;
 
-use Baethon\LaravelCriteria\Collection\AllOfCriteriaCollection;
 use Baethon\LaravelCriteria\Collection\CriteriaCollection;
+use Illuminate\Support\Collection;
 
 final class HandlerCriteria
 {
     private const FILTERS = 'filters';
     private const LIMIT = 'limit';
-    private const CONTAINS = 'contains';
-    private const EQUAL = '=';
+    /**
+     * @var array
+     */
     private array $criteria = [];
 
-    public function __construct(private array $handlerCriteria)
+    /**
+     * @var string
+     */
+    private string $criteriaNameSpace = 'Src\Shared\Infrastructure\Criteria\\';
+
+    /**
+     * @param array $handlerCriteria
+     */
+    public function __construct(private readonly array $handlerCriteria)
     {
         $this->handlerCriteria();
     }
@@ -28,34 +37,35 @@ final class HandlerCriteria
         return CriteriaCollection::create($this->criteria);
     }
 
+    /**
+     * @return void
+     */
     private function handlerCriteria(): void
     {
-        if ($this->handlerCriteria[self::FILTERS]) {
-            array_map(function ($filter, $key) {
-                if (0 === $key) {
-                    $this->criteria = array_merge($this->criteria, [
-                        new CompareCriteria(
-                            $filter["field"],
-                            $filter["operator"],
-                            $filter["value"]
-                        )
-                    ]);
-                } else {
-                    $this->criteria = array_merge($this->criteria, [
-                        new CompareOrCriteria(
-                            $filter["field"],
-                            $filter["operator"],
-                            $filter["value"]
-                        )
-                    ]);
-                }
-            }, $this->handlerCriteria[self::FILTERS], array_keys($this->handlerCriteria[self::FILTERS]));
-        }
+        $criteria = $this->getHandlerCriteria();
+        $criteria->map(function (array $filters) {
+            $reflectionClass = $this->criteriaNameSpace . $filters["type"];
+            $this->criteria = array_merge($this->criteria, [
+                new $reflectionClass(
+                    $filters["field"],
+                    $filters["operator"],
+                    $filters["value"]
+                )
+            ]);
+        });
 
         if ($this->handlerCriteria[self::LIMIT]) {
             $this->criteria = array_merge($this->criteria, [
                 new LimitCriteria($this->handlerCriteria[self::LIMIT])
             ]);
         }
+    }
+
+    /**
+     * @return Collection
+     */
+    private function getHandlerCriteria(): Collection
+    {
+        return collect($this->handlerCriteria[self::FILTERS]);
     }
 }

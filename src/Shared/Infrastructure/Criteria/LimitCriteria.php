@@ -10,7 +10,7 @@ class LimitCriteria implements CriteriaInterface
      * @param int $limit
      */
     public function __construct(
-        private int $limit,
+        private readonly int $limit,
     )
     {
     }
