@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 
 use Src\Application\User\Domain\Contracts\UserRepositoryContract;
-use Src\Application\User\Domain\Exceptions\UserNotFoundException;
 use Src\Application\User\Domain\User;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
 use Src\Application\User\Domain\ValueObjects\{
@@ -98,7 +97,7 @@ final class UserRepository implements UserRepositoryContract
      * @param UserCriteria $criteria
      * @return User
      */
-    public function findByCriteria(UserCriteria $criteria): User
+    public function match(UserCriteria $criteria): User
     {
         $query = $this->model::query();
 
