@@ -25,3 +25,15 @@ Route::post($appVersion . '/users', \Src\Application\User\Infrastructure\Control
 Route::get($appVersion . '/debug-sentry', function () {
     throw new Exception('My first Sentry error!');
 });
+
+Route::get($appVersion . '/mercado-pago', function () {
+    MercadoPago\SDK::setAccessToken('TEST-8684101127692985-030220-d8770bea427647a0535183302a4c3c27-555279991');
+    $preference = new MercadoPago\Preference();
+    $item = new MercadoPago\Item();
+    $item->title = 'Mi producto';
+    $item->quantity = 1;
+    $item->unit_price = 75;
+    $preference->items = array($item);
+    $preference->save();
+    return response()->json($preference->id);
+});
