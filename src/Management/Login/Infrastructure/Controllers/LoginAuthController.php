@@ -6,9 +6,9 @@ namespace Src\Management\Login\Infrastructure\Controllers;
 
 use Illuminate\Http\Request;
 use Src\Management\Login\Application\Login\LoginAuthUseCase;
-use Src\Management\Login\Infrastructure\Output\LoginResponse;
+use Src\Management\Login\Infrastructure\Output\LoginOutput;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
-use Src\Shared\Infrastructure\Responses\ResponseFactory;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class LoginAuthController
 {
@@ -16,11 +16,11 @@ final class LoginAuthController
 
     /**
      * @param LoginAuthUseCase $useCase
-     * @param LoginResponse $loginResponse
+     * @param LoginOutput $loginResponse
      */
     public function __construct(
         private readonly LoginAuthUseCase $useCase,
-        private readonly ResponseFactory $loginResponse
+        private readonly OutputFactory $loginResponse
     )
     {
     }
@@ -31,7 +31,7 @@ final class LoginAuthController
      */
     public function __invoke(Request $request): array
     {
-        return $this->loginResponse->response(
+        return $this->loginResponse->outPut(
             status: $this->ok(),
             error: false,
             response: $this->useCase->__invoke($request->all())->entity()

@@ -1,8 +1,10 @@
 <?php
 
-namespace Src\Shared\Infrastructure\Responses;
+declare(strict_types=1);
 
-interface ResponseFactory
+namespace Src\Shared\Infrastructure\Output;
+
+interface OutputFactory
 {
     /**
      * @param int $status
@@ -11,10 +13,10 @@ interface ResponseFactory
      * @param mixed $dependencies
      * @return mixed
      */
-    public function response(
+    public function outPut(
         int $status,
         bool $error,
         array|string|int|bool $response,
         mixed $dependencies = null
-    ): array;
+    ): mixed;
 }

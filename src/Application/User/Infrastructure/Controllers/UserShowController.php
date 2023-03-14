@@ -6,7 +6,7 @@ namespace Src\Application\User\Infrastructure\Controllers;
 
 use Src\Application\User\Application\Get\UserShowUseCase;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
-use Src\Shared\Infrastructure\Responses\ResponseFactory;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class UserShowController
 {
@@ -14,11 +14,11 @@ final class UserShowController
 
     /**
      * @param UserShowUseCase $useCase
-     * @param ResponseFactory $responseFactory
+     * @param OutputFactory $responseFactory
      */
     public function __construct(
         private readonly UserShowUseCase $useCase,
-        private readonly ResponseFactory $responseFactory
+        private readonly OutputFactory $responseFactory
     )
     {
     }
@@ -29,7 +29,7 @@ final class UserShowController
      */
     public function __invoke(int $id): array
     {
-        return $this->responseFactory->response(
+        return $this->responseFactory->outPut(
             status: $this->ok(),
             error: false,
             response: $this->useCase->__invoke($id)->entity(),

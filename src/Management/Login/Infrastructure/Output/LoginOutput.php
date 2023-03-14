@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Src\Management\Login\Infrastructure\Output;
 
-use Src\Shared\Infrastructure\Responses\ResponseFactory;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
-final class LoginResponse implements ResponseFactory
+final class LoginOutput implements OutputFactory
 {
     /**
      * @param int $status
@@ -15,14 +15,14 @@ final class LoginResponse implements ResponseFactory
      * @param mixed|null $dependencies
      * @return mixed
      */
-    public function response(
+    public function outPut(
         int $status,
         bool $error,
         int|bool|array|string $response,
         mixed $dependencies = null
     ): array
     {
-        return $this->response(
+        return $this->outPut(
             status: $status,
             error: $error,
             response: $response

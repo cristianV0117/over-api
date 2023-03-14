@@ -35,12 +35,14 @@ final class DependencyServiceProvider extends ServiceProvider
             ],
             // OUTPUT //
             [
-                "useCase" => [
-                    \Src\Application\User\Infrastructure\Controllers\UserShowController::class,
-                    \Src\Application\User\Infrastructure\Controllers\UserIndexController::class
-                ],
-                "contract" => \Src\Shared\Infrastructure\Responses\ResponseFactory::class,
-                "repository" => \Src\Shared\Infrastructure\Responses\JsonResponse::class
+                "useCase" => \Src\Application\User\Infrastructure\Controllers\UserShowController::class,
+                "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
+                "repository" => \Src\Shared\Infrastructure\Output\JsonOutput::class
+            ],
+            [
+                "useCase" => \Src\Application\User\Infrastructure\Controllers\UserIndexController::class,
+                "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
+                "repository" => \Src\Shared\Infrastructure\Output\PdfOutput::class
             ]
         ]);
         parent::__construct($app);

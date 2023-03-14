@@ -33,8 +33,8 @@ class DependencyServiceProvider extends ServiceProvider
             ],
             [
                 "useCase" => \Src\Management\Login\Infrastructure\Controllers\LoginAuthController::class,
-                "contract" => \Src\Shared\Infrastructure\Responses\ResponseFactory::class,
-                "repository" => \Src\Shared\Infrastructure\Responses\JsonResponse::class
+                "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
+                "repository" => \Src\Shared\Infrastructure\Output\JsonOutput::class
             ]
         ]);
         parent::__construct($app);

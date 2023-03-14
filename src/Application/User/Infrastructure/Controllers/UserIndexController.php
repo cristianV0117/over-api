@@ -6,7 +6,7 @@ namespace Src\Application\User\Infrastructure\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
-use Src\Shared\Infrastructure\Responses\ResponseFactory;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 use Src\Application\User\Application\Get\UserIndexUseCase;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 use Src\Shared\Infrastructure\Helper\RolesHelper;
@@ -18,11 +18,11 @@ final class UserIndexController extends CustomController
 
     /**
      * @param UserIndexUseCase $useCase
-     * @param ResponseFactory $responseFactory
+     * @param OutputFactory $responseFactory
      */
     public function __construct(
         private readonly UserIndexUseCase $useCase,
-        private readonly ResponseFactory $responseFactory
+        private readonly OutputFactory $responseFactory
     )
     {
         $this->middleware(RoleMiddleware::class, [
@@ -33,9 +33,9 @@ final class UserIndexController extends CustomController
     /**
      * @return array
      */
-    public function __invoke(): array
+    public function __invoke(): mixed
     {
-        return $this->responseFactory->response(
+        return $this->responseFactory->outPut(
             status: $this->ok(),
             error: false,
             response: $this->useCase->__invoke()->entity(),

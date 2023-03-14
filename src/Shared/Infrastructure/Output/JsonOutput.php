@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Src\Shared\Infrastructure\Responses;
+namespace Src\Shared\Infrastructure\Output;
 
 use Src\Shared\Infrastructure\Helper\ResponseHelper;
 
-final class JsonResponse implements ResponseFactory
+final class JsonOutput implements OutputFactory
 {
     use ResponseHelper;
 
@@ -15,9 +15,9 @@ final class JsonResponse implements ResponseFactory
      * @param bool $error
      * @param int|bool|array|string $response
      * @param array|null $dependencies
-     * @return mixed
+     * @return array
      */
-    public function response(
+    public function outPut(
         int $status,
         bool $error,
         int|bool|array|string $response,

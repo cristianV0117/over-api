@@ -1,0 +1,33 @@
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>user_name</th>
+            <th>first_name</th>
+            <th>second_name</th>
+            <th>first_last_name</th>
+            <th>second_last_name</th>
+            <th>email</th>
+            <th>cellphone</th>
+            <th>state_id</th>
+            <th>created_at</th>
+            <th>updated_at</th>
+        </tr>
+    </thead>
+    <tbody>
+    @for ($i = 0; $i < count($users); $i++)
+        <tr>
+            <td>{{$users[$i]["id"]}}</td>
+            <td>{{$users[$i]["user_name"]}}</td>
+            <td>{{$users[$i]["first_name"]}}</td>
+            <td>{{$users[$i]["second_name"]}}</td>
+            <td>{{$users[$i]["first_last_name"]}}</td>
+            <td>{{$users[$i]["second_last_name"]}}</td>
+            <td>{{$users[$i]["email"]}}</td>
+            <td>{{$users[$i]["cellphone"]}}</td>
+            <td>{{$users[$i]["state_id"]}}</td>
+            <td>{{$users[$i]["updated_at"]}}</td>
+        </tr>
+    @endfor
+    </tbody>
+</table>

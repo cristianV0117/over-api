@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "baethon/laravel-criteria": "^1.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "firebase/php-jwt": "^5.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel-doctrine/orm": "^1.8",
