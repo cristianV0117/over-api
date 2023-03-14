@@ -32,6 +32,15 @@ final class DependencyServiceProvider extends ServiceProvider
                 ],
                 "contract" => \Src\Application\User\Domain\Contracts\UserMailContract::class,
                 "repository" => \Src\Application\User\Infrastructure\Repositories\Mail\UserMail::class
+            ],
+            // OUTPUT //
+            [
+                "useCase" => [
+                    \Src\Application\User\Infrastructure\Controllers\UserShowController::class,
+                    \Src\Application\User\Infrastructure\Controllers\UserIndexController::class
+                ],
+                "contract" => \Src\Shared\Infrastructure\Responses\ResponseFactory::class,
+                "repository" => \Src\Shared\Infrastructure\Responses\JsonResponse::class
             ]
         ]);
         parent::__construct($app);

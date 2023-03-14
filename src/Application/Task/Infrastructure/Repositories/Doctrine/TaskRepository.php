@@ -25,7 +25,6 @@ final class TaskRepository implements TaskRepositoryContract
 
     /**
      * @return Task
-     * @throws NotSupported
      */
     public function index(): Task
     {

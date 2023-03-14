@@ -22,6 +22,6 @@ class RoleRepository implements RoleRepositoryContract
      */
     public function index(): Role
     {
-        return new Role($this->model->all()->toArray());
+        return new Role(entity: $this->model->all()->toArray());
     }
 }

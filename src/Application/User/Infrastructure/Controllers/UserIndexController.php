@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Src\Application\User\Infrastructure\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Responses\ResponseFactory;
 use Src\Application\User\Application\Get\UserIndexUseCase;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 use Src\Shared\Infrastructure\Helper\RolesHelper;
@@ -12,31 +14,34 @@ use Src\Shared\Infrastructure\Middleware\RoleMiddleware;
 
 final class UserIndexController extends CustomController
 {
-    use RolesHelper;
+    use RolesHelper, HttpCodesHelper;
 
     /**
      * @param UserIndexUseCase $useCase
+     * @param ResponseFactory $responseFactory
      */
-    public function __construct(private UserIndexUseCase $useCase)
+    public function __construct(
+        private readonly UserIndexUseCase $useCase,
+        private readonly ResponseFactory $responseFactory
+    )
     {
         $this->middleware(RoleMiddleware::class, [
             'role' => $this->superAdmin()
         ]);
-        parent::__construct();
     }
 
     /**
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(): array
     {
-        return $this->json(
-            200,
-            false,
-            $this->useCase->__invoke()->entity(),
-            [
-                "current" => '/users'
-            ]
+        return $this->responseFactory->response(
+            status: $this->ok(),
+            error: false,
+            response: $this->useCase->__invoke()->entity(),
+            dependencies: [
+            "current" => '/users'
+        ]
         );
     }
 }
