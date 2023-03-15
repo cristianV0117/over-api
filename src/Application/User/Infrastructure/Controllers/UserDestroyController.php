@@ -8,27 +8,34 @@ use Illuminate\Http\JsonResponse;
 use Src\Application\User\Application\Destroy\UserDestroyUseCase;
 use Src\Application\User\Domain\Exceptions\UserDestroyFailedException;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class UserDestroyController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param UserDestroyUseCase $useCase
+     * @param OutputFactory $outputFactory
      */
-    public function __construct(private readonly UserDestroyUseCase $useCase)
+    public function __construct(
+        private readonly UserDestroyUseCase $useCase,
+        private readonly OutputFactory $outputFactory
+    )
     {
-        parent::__construct();
     }
 
     /**
      * @param int $id
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id): array
     {
-        return $this->json(
-            200,
-            false,
-            $this->useCase->__invoke($id)->entity()
+        return $this->outputFactory->outPut(
+            status: $this->ok(),
+            error: false,
+            response: $this->useCase->__invoke($id)->entity()
         );
     }
 }

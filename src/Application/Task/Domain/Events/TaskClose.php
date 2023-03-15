@@ -25,9 +25,10 @@ class TaskClose extends DomainEvent
     }
 
     /**
+     * @param mixed $eventElements
      * @return array|null
      */
-    public function event(): ?array
+    public function event(mixed $eventElements): ?array
     {
         $idUser = 1;
 

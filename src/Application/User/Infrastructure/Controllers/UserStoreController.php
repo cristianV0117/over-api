@@ -4,31 +4,37 @@ declare(strict_types=1);
 
 namespace Src\Application\User\Infrastructure\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Src\Application\User\Application\Store\UserStoreUseCase;
 use Src\Application\User\Infrastructure\Request\UserStoreRequest;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class UserStoreController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param UserStoreUseCase $useCase
+     * @param OutputFactory $outputFactory
      */
-    public function __construct(private readonly UserStoreUseCase $useCase)
+    public function __construct(
+        private readonly UserStoreUseCase $useCase,
+        private readonly OutputFactory $outputFactory
+    )
     {
-        parent::__construct();
     }
 
     /**
      * @param UserStoreRequest $request
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(UserStoreRequest $request): JsonResponse
+    public function __invoke(UserStoreRequest $request): array
     {
-        return $this->json(
-            201,
-            false,
-            $this->useCase->__invoke($request->all())->entity()
+        return $this->outputFactory->outPut(
+            status: $this->created(),
+            error: false,
+            response: $this->useCase->__invoke($request->all())->entity()
         );
     }
 }

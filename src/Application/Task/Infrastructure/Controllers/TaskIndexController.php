@@ -7,28 +7,33 @@ namespace Src\Application\Task\Infrastructure\Controllers;
 use Illuminate\Http\JsonResponse;
 use Src\Application\Task\Application\Get\TaskIndexUseCase;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class TaskIndexController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param TaskIndexUseCase $taskIndexUseCase
+     * @param OutputFactory $outputFactory
      */
     public function __construct(
-        private readonly TaskIndexUseCase $taskIndexUseCase
+        private readonly TaskIndexUseCase $taskIndexUseCase,
+        private readonly OutputFactory $outputFactory
     )
     {
-        parent::__construct();
     }
 
     /**
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(): array
     {
-        return $this->json(
-            200,
-            false,
-            $this->taskIndexUseCase->__invoke()->entity()
+        return $this->outputFactory->outPut(
+            status: $this->ok(),
+            error: false,
+            response: $this->taskIndexUseCase->__invoke()->entity()
         );
     }
 }

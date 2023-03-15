@@ -9,29 +9,34 @@ use Illuminate\Http\Request;
 use Src\Application\User\Application\Get\UserCriteriaUseCase;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 use Src\Shared\Infrastructure\Criteria\HandlerCriteria;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class UserCriteriaController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param UserCriteriaUseCase $useCase
+     * @param OutputFactory $outputFactory
      */
     public function __construct(
-        private readonly UserCriteriaUseCase $useCase
+        private readonly UserCriteriaUseCase $useCase,
+        private readonly OutputFactory $outputFactory
     )
     {
-        parent::__construct();
     }
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request): array
     {
-        return $this->json(
-            200,
-            false,
-            $this->useCase->__invoke(
+        return $this->outputFactory->outPut(
+            status: $this->ok(),
+            error: false,
+            response: $this->useCase->__invoke(
                 (new HandlerCriteria($request->toArray()))->criteria()
             )->entity()
         );

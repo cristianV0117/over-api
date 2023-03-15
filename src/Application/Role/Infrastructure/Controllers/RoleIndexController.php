@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Src\Application\Role\Application\Get\RoleIndexUseCase;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class RoleIndexController extends CustomController
 {
@@ -15,22 +16,25 @@ final class RoleIndexController extends CustomController
 
     /**
      * @param RoleIndexUseCase $roleIndexUseCase
+     * @param OutputFactory $outputFactory
      */
-    public function __construct(private readonly RoleIndexUseCase $roleIndexUseCase)
+    public function __construct(
+        private readonly RoleIndexUseCase $roleIndexUseCase,
+        private readonly OutputFactory $outputFactory
+    )
     {
-        parent::__construct();
     }
 
     /**
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(): array
     {
-        return $this->json(
-            $this->ok(),
-            false,
-            $this->roleIndexUseCase->__invoke()->entity(),
-            [
+        return $this->outputFactory->outPut(
+            status: $this->created(),
+            error: false,
+            response: $this->roleIndexUseCase->__invoke()->entity(),
+            dependencies: [
                 "current" => '/roles'
             ]
         );

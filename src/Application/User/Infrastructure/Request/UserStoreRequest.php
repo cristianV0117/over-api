@@ -25,7 +25,7 @@ final class UserStoreRequest extends FormRequest
             'second_name' => 'nullable|max:45',
             'first_last_name' => 'required|max:45',
             'second_last_name' => 'nullable|max:45',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'cellphone' => 'nullable|max:12',
             'password' => 'required|max:125',
             'state_id' => 'required|integer'
