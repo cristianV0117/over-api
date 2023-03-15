@@ -4,34 +4,37 @@ declare(strict_types=1);
 
 namespace Src\Management\Login\Infrastructure\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\Management\Login\Application\Login\LoginAuthUseCase;
-use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Management\Login\Infrastructure\Output\LoginOutput;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
-final class LoginAuthController extends CustomController
+final class LoginAuthController
 {
     use HttpCodesHelper;
 
     /**
      * @param LoginAuthUseCase $useCase
+     * @param LoginOutput $loginResponse
      */
-    public function __construct(private readonly LoginAuthUseCase $useCase)
+    public function __construct(
+        private readonly LoginAuthUseCase $useCase,
+        private readonly OutputFactory $loginResponse
+    )
     {
-        parent::__construct();
     }
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request): array
     {
-        return $this->json(
-            $this->ok(),
-            false,
-            $this->useCase->__invoke($request->all())->entity()
+        return $this->loginResponse->outPut(
+            status: $this->ok(),
+            error: false,
+            response: $this->useCase->__invoke($request->all())->entity()
         );
     }
 }

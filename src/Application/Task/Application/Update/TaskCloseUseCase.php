@@ -29,7 +29,7 @@ final class TaskCloseUseCase
     public function __invoke(int $id): Task
     {
         $task = $this->taskRepositoryContract->close(new TaskId($id));
-        $this->eventBus->publish($task->events()->event());
+        $this->eventBus->publish($task->events()->event(null));
         return $task;
     }
 }

@@ -31,7 +31,7 @@ final class UserRepository implements UserRepositoryContract
      */
     public function index(): User
     {
-        return new User($this->model->all()->toArray());
+        return new User(entity:  $this->model->all()->toArray());
     }
 
     /**
@@ -42,7 +42,7 @@ final class UserRepository implements UserRepositoryContract
     {
         $user = $this->model->find($id->value());
 
-        return ($user) ? new User($user->toArray()) : new User(null, null, "USER_NOT_FOUND");
+        return ($user) ? new User(entity: $user->toArray()) : new User(exception: "USER_NOT_FOUND");
     }
 
     /**
@@ -53,7 +53,7 @@ final class UserRepository implements UserRepositoryContract
     {
         $store = $this->model->create($store->handler());
 
-        return ($store) ? new User($store->toArray()) : new User(null, null, 'USER_STORE_FAILED');
+        return ($store) ? new User(entity: $store->toArray()) : new User(exception: 'USER_STORE_FAILED');
     }
 
     /**
@@ -66,14 +66,14 @@ final class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return (new User(null, null, "USER_NOT_FOUND"));
+            return (new User(exception: "USER_NOT_FOUND"));
         }
 
-        return ($record->update($update->handler())) ? new User([
+        return ($record->update($update->handler())) ? new User(entity: [
             "id" => $record->id,
             "user_name" => $record->user_name,
             "email" => $record->email
-        ]) : new User(null, null, 'USER_UPDATED_FAILED');
+        ]) : new User(exception: 'USER_UPDATED_FAILED');
     }
 
     /**
@@ -85,12 +85,12 @@ final class UserRepository implements UserRepositoryContract
         $record = $this->model->find($id->value());
 
         if (is_null($record)) {
-            return new User(null, null, 'USER_NOT_FOUND');
+            return new User(exception: 'USER_NOT_FOUND');
         }
 
-        return ($record->delete()) ? new User([
+        return ($record->delete()) ? new User(entity: [
             "id" => $record->id
-        ]) : new User(null, null, 'USER_DESTROY_FAILED');
+        ]) : new User(exception: 'USER_DESTROY_FAILED');
     }
 
     /**
@@ -103,6 +103,6 @@ final class UserRepository implements UserRepositoryContract
 
         $query->apply($criteria->value());
 
-        return new User($query->get()->toArray());
+        return new User(entity: $query->get()->toArray());
     }
 }

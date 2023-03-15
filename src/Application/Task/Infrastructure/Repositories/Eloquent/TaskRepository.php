@@ -44,7 +44,7 @@ final class TaskRepository implements TaskRepositoryContract
 
         $store = $this->model->create($handler);
 
-        return new Task($store->toArray(), 'TASK_CREATED');
+        return new Task(entity: $store->toArray(), event: 'TASK_CREATED');
     }
 
     /**
@@ -58,7 +58,7 @@ final class TaskRepository implements TaskRepositoryContract
         $task->status = 2;
         $task->save();
 
-        return new Task($task->id, 'TASK_CLOSE');
+        return new Task(entity: $task->id, event: 'TASK_CLOSE');
     }
 
     /**

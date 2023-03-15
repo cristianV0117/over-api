@@ -4,32 +4,36 @@ declare(strict_types=1);
 
 namespace Src\Application\User\Infrastructure\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Src\Application\User\Application\Get\UserShowUseCase;
-use Src\Application\User\Domain\Exceptions\UserNotFoundException;
-use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
-final class UserShowController extends CustomController
+final class UserShowController
 {
+    use HttpCodesHelper;
+
     /**
      * @param UserShowUseCase $useCase
+     * @param OutputFactory $responseFactory
      */
-    public function __construct(private readonly UserShowUseCase $useCase)
+    public function __construct(
+        private readonly UserShowUseCase $useCase,
+        private readonly OutputFactory $responseFactory
+    )
     {
-        parent::__construct();
     }
 
     /**
      * @param int $id
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id): array
     {
-        return $this->json(
-            200,
-            false,
-            $this->useCase->__invoke($id)->entity(),
-            [
+        return $this->responseFactory->outPut(
+            status: $this->ok(),
+            error: false,
+            response: $this->useCase->__invoke($id)->entity(),
+            dependencies: [
                 "current" => '/users/' . $id
             ]
         );

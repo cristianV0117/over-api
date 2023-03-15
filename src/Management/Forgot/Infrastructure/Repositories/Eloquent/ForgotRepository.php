@@ -27,13 +27,13 @@ final class ForgotRepository implements ForgotRepositoryContract
         $record = $this->model->where('email', $reset->value()["email"])->first();
 
         if (is_null($record)) {
-            return new Forgot(null, null, 'USER_NOT_FOUND');
+            return new Forgot(exception: 'USER_NOT_FOUND');
         }
 
         return ($record->update($reset->handler())) ? new Forgot([
             "id" => $record->id,
             "user_name" => $record->user_name,
             "email" => $record->email
-        ]) : new Forgot(null, null, 'UPDATE_PASSWORD_USER_FAILED');
+        ]) : new Forgot(exception: 'UPDATE_PASSWORD_USER_FAILED');
     }
 }

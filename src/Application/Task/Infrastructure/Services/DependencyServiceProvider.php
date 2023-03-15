@@ -37,6 +37,16 @@ final class DependencyServiceProvider extends ServiceProvider
                 ],
                 "contract" => \Src\Application\Task\Domain\Contracts\TaskRepositoryContract::class,
                 "repository" => \Src\Application\Task\Infrastructure\Repositories\Doctrine\TaskRepository::class
+            ],
+            // OUTPUT //
+            [
+                "useCase" => [
+                    \Src\Application\Task\Infrastructure\Controllers\TaskIndexController::class,
+                    \Src\Application\Task\Infrastructure\Controllers\TaskStoreController::class,
+                    \Src\Application\Task\Infrastructure\Controllers\TaskCloseController::class
+                ],
+                "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
+                "repository" => \Src\Shared\Infrastructure\Output\JsonOutput::class
             ]
         ]);
         parent::__construct($app);

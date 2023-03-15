@@ -9,28 +9,35 @@ use Src\Application\User\Application\Update\UserUpdateUseCase;
 use Src\Application\User\Domain\Exceptions\UserUpdateException;
 use Src\Application\User\Infrastructure\Request\UserUpdateRequest;
 use Src\Shared\Infrastructure\Controllers\CustomController;
+use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
 final class UserUpdateController extends CustomController
 {
+    use HttpCodesHelper;
+
     /**
      * @param UserUpdateUseCase $useCase
+     * @param OutputFactory $outputFactory
      */
-    public function __construct(private readonly UserUpdateUseCase $useCase)
+    public function __construct(
+        private readonly UserUpdateUseCase $useCase,
+        private readonly OutputFactory $outputFactory
+    )
     {
-        parent::__construct();
     }
 
     /**
      * @param UserUpdateRequest $request
      * @param int $id
-     * @return JsonResponse
+     * @return array
      */
-    public function __invoke(UserUpdateRequest $request, int $id): JsonResponse
+    public function __invoke(UserUpdateRequest $request, int $id): array
     {
-        return $this->json(
-            200,
-            false,
-            $this->useCase->__invoke($request->all(), $id)->entity()
+        return $this->outputFactory->outPut(
+            status: $this->created(),
+            error: false,
+            response: $this->useCase->__invoke($request->all(), $id)->entity()
         );
     }
 }
