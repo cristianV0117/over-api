@@ -195,7 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         // HEXAGONAL ZONE //
         // STATUS - SYSTEM //
         \Src\Status\System\Infrastructure\Services\RouteServiceProvider::class,
@@ -230,6 +230,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

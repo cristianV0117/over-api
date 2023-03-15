@@ -42,7 +42,7 @@ final class DependencyServiceProvider extends ServiceProvider
             [
                 "useCase" => \Src\Application\User\Infrastructure\Controllers\UserIndexController::class,
                 "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
-                "repository" => \Src\Shared\Infrastructure\Output\PdfOutput::class
+                "repository" => \Src\Shared\Infrastructure\Output\ExcelOutput::class
             ]
         ]);
         parent::__construct($app);
