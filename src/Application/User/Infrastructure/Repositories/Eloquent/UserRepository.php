@@ -7,12 +7,7 @@ namespace Src\Application\User\Infrastructure\Repositories\Eloquent;
 use Src\Application\User\Domain\Contracts\UserRepositoryContract;
 use Src\Application\User\Domain\User;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
-use Src\Application\User\Domain\ValueObjects\{
-    UserCriteria,
-    UserId,
-    UserStore,
-    UserUpdate
-};
+use Src\Application\User\Domain\ValueObjects\{UserCriteria, UserId, UserStore, UserStoreImportCriteria, UserUpdate};
 use Src\Application\User\Infrastructure\Repositories\Eloquent\User as Model;
 
 final class UserRepository implements UserRepositoryContract
@@ -104,5 +99,10 @@ final class UserRepository implements UserRepositoryContract
         $query->apply($criteria->value());
 
         return new User(entity: $query->get()->toArray());
+    }
+
+    public function storeImport(UserStoreImportCriteria $userStoreImport): User
+    {
+        dd($userStoreImport->value());
     }
 }

@@ -37,4 +37,16 @@ trait EnvHelper
     {
         return env("WEB_ROUTE");
     }
+
+    /**
+     * @return string
+     */
+    public function storage(): string
+    {
+        if ("local" == env("APP_ENV")) {
+            return "public";
+        }
+
+        return "another_disk";
+    }
 }

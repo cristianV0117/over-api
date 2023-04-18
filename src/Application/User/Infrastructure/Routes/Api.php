@@ -9,3 +9,4 @@ Route::get('/{id}', UserShowController::class);
 Route::delete('/{id}', UserDestroyController::class);
 Route::put('/{id}', UserUpdateController::class);
 Route::patch('/', UserCriteriaController::class);
+Route::post('/import', UserImportController::class);

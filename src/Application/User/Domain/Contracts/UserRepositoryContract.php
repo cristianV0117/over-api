@@ -8,6 +8,7 @@ use Src\Application\User\Domain\User;
 use Src\Application\User\Domain\ValueObjects\UserCriteria;
 use Src\Application\User\Domain\ValueObjects\UserId;
 use Src\Application\User\Domain\ValueObjects\UserStore;
+use Src\Application\User\Domain\ValueObjects\UserStoreImportCriteria;
 use Src\Application\User\Domain\ValueObjects\UserUpdate;
 
 interface UserRepositoryContract
@@ -28,6 +29,12 @@ interface UserRepositoryContract
      * @return User
      */
     public function store(UserStore $store): User;
+
+    /**
+     * @param UserStoreImportCriteria $userStoreImport
+     * @return User
+     */
+    public function storeImport(UserStoreImportCriteria $userStoreImport): User;
 
     /**
      * @param UserId $id

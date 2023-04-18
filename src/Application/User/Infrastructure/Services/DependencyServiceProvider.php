@@ -21,7 +21,8 @@ final class DependencyServiceProvider extends ServiceProvider
                     \Src\Application\User\Application\Store\UserStoreUseCase::class,
                     \Src\Application\User\Application\Destroy\UserDestroyUseCase::class,
                     \Src\Application\User\Application\Update\UserUpdateUseCase::class,
-                    \Src\Application\User\Application\Get\UserCriteriaUseCase::class
+                    \Src\Application\User\Application\Get\UserCriteriaUseCase::class,
+                    \Src\Application\User\Application\Store\UserStoreImportUseCase::class
                 ],
                 "contract" => \Src\Application\User\Domain\Contracts\UserRepositoryContract::class,
                 "repository" => \Src\Application\User\Infrastructure\Repositories\Eloquent\UserRepository::class
@@ -49,6 +50,11 @@ final class DependencyServiceProvider extends ServiceProvider
                 "useCase" => \Src\Application\User\Infrastructure\Controllers\UserIndexController::class,
                 "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
                 "repository" => \Src\Shared\Infrastructure\Output\JsonOutput::class
+            ],
+            [
+                "useCase" => \Src\Application\User\Application\Import\UserImportUseCase::class,
+                "contract" => \Src\Application\User\Domain\Contracts\UserImportContract::class,
+                "repository" => \Src\Application\User\Infrastructure\Repositories\Import\UserImport::class
             ]
         ]);
         parent::__construct($app);
