@@ -10,24 +10,31 @@ use Src\Application\User\Application\Store\UserStoreImportUseCase;
 use Src\Application\User\Domain\Exceptions\UserImportFailedException;
 use Src\Shared\Infrastructure\Controllers\CustomController;
 use Src\Shared\Infrastructure\Helper\HttpCodesHelper;
+use Src\Shared\Infrastructure\Output\OutputFactory;
 
-class UserImportController extends CustomController
+final class UserImportController extends CustomController
 {
     use HttpCodesHelper;
 
+    /**
+     * @param UserImportUseCase $userImportUseCase
+     * @param UserStoreImportUseCase $userStoreImportUseCase
+     * @param OutputFactory $outputFactory
+     */
     public function __construct(
         private readonly UserImportUseCase $userImportUseCase,
-        private readonly UserStoreImportUseCase $userStoreImportUseCase
+        private readonly UserStoreImportUseCase $userStoreImportUseCase,
+        private readonly OutputFactory $outputFactory
     )
     {
     }
 
     /**
      * @param Request $request
-     * @return void
+     * @return array
      * @throws UserImportFailedException
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): array
     {
         if (!$request->file()) {
             throw new UserImportFailedException("Debes importar el archivo", $this->badRequest());
@@ -36,6 +43,11 @@ class UserImportController extends CustomController
         $import = $this->userStoreImportUseCase->__invoke(
             $this->userImportUseCase->__invoke($request->file()["import"])
         );
-        dd($import);
+
+        return $this->outputFactory->outPut(
+            status: $this->created(),
+            error: false,
+            response: $import->entity()
+        );
     }
 }

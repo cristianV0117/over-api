@@ -103,6 +103,12 @@ final class UserRepository implements UserRepositoryContract
 
     public function storeImport(UserStoreImportCriteria $userStoreImport): User
     {
-        dd($userStoreImport->value());
+        $store = $this->model->insert($userStoreImport->handler());
+
+        if (!$store) {
+            return new User(exception: 'USER_STORE_FAILED');
+        }
+
+        return new User(entity: "Usuarios registrados");
     }
 }

@@ -46,6 +46,8 @@ final class UserStoreImportCriteria extends CriteriaValueObject
         'integer'
     ];
 
+    private const PASSWORD = 'password';
+
     /**
      * @var array
      */
@@ -76,6 +78,37 @@ final class UserStoreImportCriteria extends CriteriaValueObject
     }
 
     /**
+     * @return array
+     */
+    public function handler(): array
+    {
+        return $this->rows;
+    }
+
+    /**
+     * @throws UserImportFailedException
+     */
+    private function columnsValidator(): void
+    {
+        $this->cleanColumnsFromSpaces();
+        $this->isColumnsCorrect();
+        $this->isColumnsRightPosition();
+        $this->rowsAssigmentColumns();
+    }
+
+    /**
+     * @return void
+     * @throws UserImportFailedException
+     */
+    private function rowsValidator(): void
+    {
+        $this->isRowsRequired();
+        $this->isRowsType();
+        $this->modifyPassword();
+        $this->assigmentDates();
+    }
+
+    /**
      * @return void
      * @throws UserImportFailedException
      */
@@ -84,6 +117,17 @@ final class UserStoreImportCriteria extends CriteriaValueObject
         if (count($this->value[0]) <= 1) {
             throw new UserImportFailedException("No puedes importar archivos vacios", $this->badRequest());
         }
+    }
+
+    /**
+     * @return void
+     */
+    private function propertyAssignment(): void
+    {
+        $import = $this->value;
+        $this->columns = $import[0];
+        unset($import[0]);
+        $this->rows = $import;
     }
 
     /**
@@ -106,38 +150,6 @@ final class UserStoreImportCriteria extends CriteriaValueObject
         $this->rows = array_filter($this->rows, function (array $subArray) {
             return !self::subArrayAllNulls($subArray);
         });
-    }
-
-    /**
-     * @return void
-     */
-    private function propertyAssignment(): void
-    {
-        $import = $this->value;
-        $this->columns = $import[0];
-        unset($import[0]);
-        $this->rows = $import;
-    }
-
-    /**
-     * @throws UserImportFailedException
-     */
-    private function columnsValidator(): void
-    {
-        $this->cleanColumnsFromSpaces();
-        $this->isColumnsCorrect();
-        $this->isColumnsRightPosition();
-        $this->rowsAssigmentColumns();
-    }
-
-    /**
-     * @return void
-     * @throws UserImportFailedException
-     */
-    private function rowsValidator(): void
-    {
-        $this->isRowsRequired();
-        $this->isRowsType();
     }
 
     /**
@@ -271,6 +283,35 @@ final class UserStoreImportCriteria extends CriteriaValueObject
                 $this->badRequest()
             );
         }
+    }
+
+    /**
+     * @return void
+     */
+    private function modifyPassword(): void
+    {
+        $this->rows = array_map(function ($array) {
+            return array_map(function ($value, $key) {
+                if (self::PASSWORD === $key) {
+                    return password_hash($value, PASSWORD_DEFAULT);
+                }
+
+                return $value;
+            }, $array, array_keys($array));
+        }, $this->rows);
+        $this->rowsAssigmentColumns();
+    }
+
+    /**
+     * @return void
+     */
+    private function assigmentDates(): void
+    {
+        $this->rows = array_map(function ($array) {
+            $array['created_at'] = now();
+            $array['updated_at'] = now();
+            return $array;
+        }, $this->rows);
     }
 
     /**

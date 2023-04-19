@@ -41,7 +41,8 @@ final class DependencyServiceProvider extends ServiceProvider
                     \Src\Application\User\Infrastructure\Controllers\UserDestroyController::class,
                     \Src\Application\User\Infrastructure\Controllers\UserStoreController::class,
                     \Src\Application\User\Infrastructure\Controllers\UserUpdateController::class,
-                    \Src\Application\User\Infrastructure\Controllers\UserCriteriaController::class
+                    \Src\Application\User\Infrastructure\Controllers\UserCriteriaController::class,
+                    \Src\Application\User\Infrastructure\Controllers\UserImportController::class
                 ],
                 "contract" => \Src\Shared\Infrastructure\Output\OutputFactory::class,
                 "repository" => \Src\Shared\Infrastructure\Output\JsonOutput::class
