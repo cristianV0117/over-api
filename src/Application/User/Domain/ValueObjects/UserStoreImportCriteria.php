@@ -7,7 +7,6 @@ namespace Src\Application\User\Domain\ValueObjects;
 use Src\Application\User\Domain\Exceptions\UserImportFailedException;
 use Src\Shared\Domain\Helpers\HttpCodesHelper;
 use Src\Shared\Domain\ValueObjects\CriteriaValueObject;
-use function Clue\StreamFilter\fun;
 
 final class UserStoreImportCriteria extends CriteriaValueObject
 {
@@ -104,7 +103,9 @@ final class UserStoreImportCriteria extends CriteriaValueObject
             }, ARRAY_FILTER_USE_BOTH);
         }, $this->rows);
 
-        $this->rows = array_filter($this->rows, fn($value) => !empty($value));
+        $this->rows = array_filter($this->rows, function (array $subArray) {
+            return !self::subArrayAllNulls($subArray);
+        });
     }
 
     /**
@@ -241,7 +242,7 @@ final class UserStoreImportCriteria extends CriteriaValueObject
      */
     private function isRowsType(): void
     {
-        $message = "Existe un error con los tipos de datos de ";
+        $message = "Existe un error con los tipos de datos de: ";
 
         $getType = array_map(function ($array) {
             return array_map(function ($value) {
@@ -249,38 +250,37 @@ final class UserStoreImportCriteria extends CriteriaValueObject
             }, $array);
         }, $this->rows);
 
-        $compare = array_map(function ($value) {
-            return self::arrayCompareForDataType(self::DATA_TYPE, $value);
-        }, $getType);
+        $response = array_map(function ($getTypeValues, $getTypeKeys) use ($message) {
+            return implode(array_map(function ($dataType, $value, $key) use ($message, $getTypeKeys) {
+                if ($dataType !== $value) {
+                    $message .= sprintf(
+                        "%s en el registro %s |",
+                        $key,
+                        $getTypeKeys
+                    );
+                    return $message;
+                } else {
+                    return null;
+                }
+            }, self::DATA_TYPE, $getTypeValues, array_keys($getTypeValues)));
+        }, $getType, array_keys($getType));
 
-        if (!empty($compare)) {
-            foreach ($compare as $key => $value) {
-                $message .= sprintf(
-                    "%s en el registro %s %s",
-                    json_encode($value),
-                    $key,
-                    '|'
-                );
-            }
-            throw new UserImportFailedException($message, $this->badRequest());
+        if (!empty(implode($response))) {
+            throw new UserImportFailedException(
+                implode($response),
+                $this->badRequest()
+            );
         }
     }
 
     /**
-     * @param array $firstArray
-     * @param array $secondArray
-     * @return array|bool
+     * @param $subArray
+     * @return bool
      */
-    private static function arrayCompareForDataType(array $firstArray, array $secondArray): array|bool
+    private static function subArrayAllNulls($subArray): bool
     {
-        if (count($firstArray) !== count($secondArray)) {
-            return false;
-        }
-
-        $different = array_map(function($a, $b, $key) {
-            return $a !== $b ? [$key => $b] : null;
-        }, $firstArray, $secondArray, array_keys($secondArray));
-
-        return array_values(array_filter($different));
+        return array_reduce($subArray, function ($allNulls, $value) {
+            return $allNulls && is_null($value) || $value === " ";
+        }, true);
     }
 }
