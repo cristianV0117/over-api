@@ -42,7 +42,7 @@ final class UserStoreImportCriteria extends CriteriaValueObject
         'string',
         'string',
         'string',
-        'string',
+        'integer',
         'string',
         'integer'
     ];
@@ -129,9 +129,14 @@ final class UserStoreImportCriteria extends CriteriaValueObject
         $this->rowsAssigmentColumns();
     }
 
+    /**
+     * @return void
+     * @throws UserImportFailedException
+     */
     private function rowsValidator(): void
     {
         $this->isRowsRequired();
+        $this->isRowsType();
     }
 
     /**
@@ -228,5 +233,54 @@ final class UserStoreImportCriteria extends CriteriaValueObject
                 $this->badRequest()
             );
         }
+    }
+
+    /**
+     * @return void
+     * @throws UserImportFailedException
+     */
+    private function isRowsType(): void
+    {
+        $message = "Existe un error con los tipos de datos de ";
+
+        $getType = array_map(function ($array) {
+            return array_map(function ($value) {
+                return gettype($value);
+            }, $array);
+        }, $this->rows);
+
+        $compare = array_map(function ($value) {
+            return self::arrayCompareForDataType(self::DATA_TYPE, $value);
+        }, $getType);
+
+        if (!empty($compare)) {
+            foreach ($compare as $key => $value) {
+                $message .= sprintf(
+                    "%s en el registro %s %s",
+                    json_encode($value),
+                    $key,
+                    '|'
+                );
+            }
+            throw new UserImportFailedException($message, $this->badRequest());
+        }
+    }
+
+    /**
+     * @param array $firstArray
+     * @param array $secondArray
+     * @return array|bool
+     */
+    private static function arrayCompareForDataType(array $firstArray, array $secondArray): array|bool
+    {
+        if (count($firstArray) !== count($secondArray)) {
+            return false;
+        }
+
+        $different = array_map(function($a, $b, $key) {
+            return $a !== $b ? [$key => $b] : null;
+        }, $firstArray, $secondArray, array_keys($secondArray));
+
+        return array_values(array_filter($different));
     }
 }
