@@ -7,25 +7,25 @@
     "require": {
         "php": "^8.1",
         "baethon/laravel-criteria": "^1.0",
-        "barryvdh/laravel-dompdf": "^2.0",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "darkaonline/l5-swagger": "^9.0",
+        "doctrine/annotations": "*",
+        "doctrine/reflection": "*",
         "firebase/php-jwt": "^5.4",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel-doctrine/orm": "^1.8",
-        "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
+        "laravel/framework": "^12.0",
+        "laravel/sanctum": "*",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
         "pusher/pusher-php-server": "^5.0.3",
-        "sentry/sentry-laravel": "^2.13"
+        "sentry/sentry-laravel": "^4.13"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {

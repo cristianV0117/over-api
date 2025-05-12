@@ -194,7 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
+        //LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         // HEXAGONAL ZONE //
         // STATUS - SYSTEM //
