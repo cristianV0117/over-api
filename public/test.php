@@ -1,0 +1,1 @@
+<?php echo "Funciona Laravel desde Railway"; ?>
