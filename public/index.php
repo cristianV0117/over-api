@@ -1,7 +1,5 @@
 <?php
 
-dd('Laravel está cargando desde public/index.php');
-
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
